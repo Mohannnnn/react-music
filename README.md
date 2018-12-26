@@ -1,5 +1,5 @@
-# react-cli4
-React 16.0 boilerplate with react & webpack 4
+# React-music
+React Music WebApp
 
 [TOC]
 ## 项目初始化

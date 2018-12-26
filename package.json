@@ -1,18 +1,12 @@
 {
-  "name": "react-cli4",
+  "name": "react-music",
   "version": "0.0.1",
-  "description": "React 16.0 boilerplate with react-router-dom, redux & webpack 4.x",
+  "description": "React全家桶音乐webapp",
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --config build/webpack.dev.conf.js",
     "build": "webpack -p --mode production --progress --config ./build/webpack.prod.conf.js",
-    "analysis": "cross-env NODE_ENV=analysis webpack -p --mode production --progress --config ./build/webpack.prod.conf.js ",
-    "depoly": "npm run build && node ./deploy.js",
-    "test": "jest --coverage",
-    "fix": "eslint --fix \"src/**/*.js\"",
-    "format": "prettier --single-quote --write \"src/**/*.js\" && yarn fix",
-    "precommit": "yarn format && lint-staged",
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "analysis": "cross-env NODE_ENV=analysis webpack -p --mode production --progress --config ./build/webpack.prod.conf.js "
   },
   "lint-staged": {
     "*.js": [
@@ -21,26 +15,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dante-dan/react-sample-javascript.git"
+    "url": ""
   },
-  "author": "duanjl <634344393@qq.com>",
+  "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Dante-dan/react-sample/issues"
-  },
-  "homepage": "https://github.com/Dante-dan/react-sample#readme",
-  "jest": {
-    "coverageDirectory": "./test/coverage/",
-    "moduleNameMapper": {},
-    "modulePaths": [
-      "<rootDir>/src/"
-    ],
-    "resetMocks": true,
-    "setupFiles": [],
-    "testPathIgnorePatterns": [
-      "/node_modules/"
-    ]
-  },
   "devDependencies": {
     "@babel/core": "^7.0.0-rc.1",
     "@commitlint/cli": "^7.0.0",
