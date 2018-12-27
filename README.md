@@ -43,7 +43,7 @@ yarn install / npm install
 ```
 ### 启动项目
 ```
-yarn start/npm run start
+yarn dev/npm run dev
 ```
 ### 打包项目
 ```

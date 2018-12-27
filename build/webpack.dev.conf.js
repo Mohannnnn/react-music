@@ -34,7 +34,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin // 终端输出的只有初始启动信息。 webpack 的警告和错误是不输出到终端的
     watchOptions: {
       poll: false
-    }
+    },
+    disableHostCheck : true
   },
   plugins: [
     new webpack.DefinePlugin({
