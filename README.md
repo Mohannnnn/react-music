@@ -1,22 +1,12 @@
 # React-music
-React Music WebApp
+React Music WebApp，在听音乐的时候忽然想听腾格尔的钢铁之翼（隐形的翅膀），在网易云上却找不到，就很气。于是想到了做一个，音乐搜索的功能，把所有想听的歌，能够一次性在酷狗、网易云、QQ、虾米等平台上找找完。
 
-[TOC]
-## 项目初始化
-### 统一规范代码格式
-1. 配置 `.editorconfig` 使得IDE的方式统一 (见代码)
-2. 配置 `.eslintrc.js` 使得代码规范统一 (见代码)
-### 预期功能
-1. 管理资源： 能加载css、sccc、less、以及静态文件
-2. 管理输出：将打包后的静态文件输出至static目录下，以各自的文件类型管理
-3. dev：使用source map，方便调试时代码定位
-4. dev：配置devServer，并配置热替换，热加载，自动刷新，自动打开浏览器，并预留proxyTable
-5. dev：设置默认打开8080，被占用则寻找下一个空接口
-6. production：代码分离，打包css文件，css代码压缩，js代码压缩，输出到模板html，配置gzip
-7. analysis:：使用BundleAnalyzerPlugin 分析打包后的性能
+### 技术栈
+
+`react` + `react-router` + `ES6/7` + `webpack4` + `Ant Design` + `fetch` + `scss`
+
 ### 目录结构
 ```bash
-:.
 │  .babelrc      		#babel的规则以及插件
 │  .editorconfig		#IDE/编辑器相关的配置
 │  .eslintignore		#Eslint忽视的目录
@@ -41,11 +31,11 @@ React Music WebApp
     │  index.ejs
     │  index.js
     │
+    |-api               #接口api等配置
+    |-compontents       #组件
+    |-store             #Redux管理目录
+    |-utils             #工具函数位置
     └─assets			#静态目录，存放静态资源
-        │  config.json
-        │
-        └─img
-                logo.svg
 ```
 ### 安装依赖
 ```bash
