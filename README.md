@@ -3,7 +3,7 @@ React Music WebApp，在听音乐的时候忽然想听腾格尔的钢铁之翼�
 
 ### 技术栈
 
-`react` + `react-router` + `ES6/7` + `webpack4` + `Ant Design` + `fetch` + `scss`
+`react` + `react-router` + `ES6/7` + `webpack4` + `Ant Design` + `fetch/axios` + `scss`
 
 ### 目录结构
 ```bash
@@ -35,6 +35,7 @@ React Music WebApp，在听音乐的时候忽然想听腾格尔的钢铁之翼�
     │-compontents       #组件
     │-store             #Redux管理目录
     │-utils             #工具函数位置
+    │-router            #路由
     └─assets			#静态目录，存放静态资源
 ```
 ### 安装依赖
