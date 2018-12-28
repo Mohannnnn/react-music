@@ -49,8 +49,4 @@ yarn dev/npm run dev
 ```
 yarn build/npm run build
 ```
-### 部署项目
-```
-yarn deploy
-```
 
