@@ -42,28 +42,22 @@ module.exports = {
         }]
       },
       // // 处理node_modules中的样式问题
-      // {
-      //   test: /\.less$/,
-      //   include: /node_modules/,
-      //   use: [
-      //     MiniCssExtractPlugin.loader,
-      //     'css-loader',
-      //     {
-      //       loader: 'postcss-loader',
-      //       options: {
-      //         plugins: () => [autoprefixer({ browsers: 'last 5 versions' })],
-      //         sourceMap: false,
-      //       },
-      //     },
-      //     {
-      //       loader: 'less-loader',
-      //       options: {
-      //         javascriptEnabled: true,
-      //         sourceMap: false,
-      //       },
-      //     },
-      //   ],
-      // },
+      {
+        test: /\.less$/,
+        include: /node_modules/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+              sourceMap: false,
+            },
+          },
+        ],
+      },
       // {
       //   test: /\.css$/,
       //   include: /node_modules/,
@@ -76,16 +70,18 @@ module.exports = {
       //         importLoaders: 2,
       //         minimize: false,
       //       }
-      //     },
-      //     {
-      //       loader: 'postcss-loader',
-      //       options: {
-      //         plugins: () => [autoprefixer({ browsers: 'last 5 versions' })],
-      //         sourceMap: false,
-      //       },
-      //     },
+      //     }
       //   ],
       // },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader:'sass-loader'
+          }
+        ]
+      },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
@@ -95,7 +91,7 @@ module.exports = {
           // 因为使用了CopyWebpackPlugin，防止诸如[name][hash].[ext]和[name].[ext]文件同时存在
           // 特将文件名指定为[name].[ext]
           fallback: 'file-loader',
-          name: 'assets/img/[name].[ext]',
+          name: 'assets/imgages/[name].[ext]',
           limit: 10000,
         }
       },
