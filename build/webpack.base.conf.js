@@ -58,15 +58,10 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader:'sass-loader'
-          }
-        ]
-      },
+      // {
+      //   test: /\.scss$/,
+      //   use: ['style-loader', 'css-loader','sass-loader']
+      // },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',

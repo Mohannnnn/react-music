@@ -56,7 +56,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       inject: true
     }),
     new CopyWebpackPlugin([{
-      from: './src/assets/imgages/favicon.ico'
+      from: './src/assets/images/favicon.ico'
     }, ])
   ]
 })
