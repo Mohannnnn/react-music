@@ -58,21 +58,6 @@ module.exports = {
           },
         ],
       },
-      // {
-      //   test: /\.css$/,
-      //   include: /node_modules/,
-      //   use: [
-      //     MiniCssExtractPlugin.loader,
-      //     {
-      //       loader: 'css-loader',
-      //       options: {
-      //         sourceMap: false,
-      //         importLoaders: 2,
-      //         minimize: false,
-      //       }
-      //     }
-      //   ],
-      // },
       {
         test: /\.scss$/,
         use: [
