@@ -71,6 +71,7 @@
     "postcss-safe-parser": "^4.0.1",
     "prettier": "^1.14.2",
     "redux-thunk": "^2.3.0",
+    "radium": "^0.25.1",
     "sass-loader": "^7.1.0",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.21.0",
