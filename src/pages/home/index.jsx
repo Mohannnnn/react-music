@@ -6,7 +6,7 @@ import {HashRouter as Router, Switch, Route, Redirect , Link} from 'react-router
 import './index.scss';
 import HotList from '../hotList/index';
 import Recommend from '../recommend/index';
-import moduleName from '../search/index';
+import Searchs from '../search/index';
 
 const {Header, Content, Footer, Sider} = Layout;
 const {Search} = Input;
@@ -16,7 +16,6 @@ class Home extends React.Component{
         super(props);
         this.state = {
             title: 'Music',
-            collapsed: false
         }
     }
     componentDidMount(){
@@ -37,10 +36,22 @@ class Home extends React.Component{
                             </Col>
                         </Row>
                     </Header>
-                    <Content style={{background:'#fff',padding:'0 10px'}}>
-                        <Link to={`${this.props.match.url}/hotlist`}>layout</Link>
+                    <Content style={{background:'#fff'}}>
+                        <Menu mode='horizontal' defaultSelectedKeys={['recommend']} style={{display:'flex',justifyContent:'space-between'}}>
+                            <Menu.Item key="recommend">
+                                <Link to={`${this.props.match.url}/recommend`}>推荐音乐</Link>
+                            </Menu.Item>
+                            <Menu.Item key="hotlist">
+                                <Link to={`${this.props.match.url}/hotlist`}>热门歌曲</Link>
+                            </Menu.Item>
+                            <Menu.Item key="search">
+                                <Link to={`${this.props.match.url}/search`}>搜索</Link>
+                            </Menu.Item>
+                        </Menu>
                         <Switch>
                             <Route path={`${this.props.match.path}/hotlist`} exact component={HotList}/>
+                            <Route path={`${this.props.match.path}/recommend`} exact component={Recommend}/>
+                            <Route path={`${this.props.match.path}/search`} exact component={Searchs}/>
                         </Switch>
                     </Content>
                     <Footer style={{background:'#fff',padding:'0 10px'}}>
