@@ -55,7 +55,7 @@ class Home extends React.Component{
                         </Switch>
                     </Content>
                     <Footer style={{background:'#fff',padding:'0 10px'}}>
-                        Footer
+                        Footers
                     </Footer>
                 </Layout>
             </div>
