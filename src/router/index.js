@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn]
  * @Date: 2018-12-27 17:07:02
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-03 18:48:28
+ * @Last Modified time: 2019-01-11 15:08:52
  */
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
