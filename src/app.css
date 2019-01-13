@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2018-12-29 14:10:20 
  * @Last Modified by: wuhan
- * @Last Modified time: 2018-12-29 15:12:00
+ * @Last Modified time: 2019-01-13 18:28:16
  */
 @charset "utf-8";
 @media screen and (min-width: 750px) {
@@ -13,4 +13,5 @@
 }
 .app {
     background: #fdfdfd;
+    overflow: hidden;
 }
