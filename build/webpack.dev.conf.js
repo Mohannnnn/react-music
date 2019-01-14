@@ -30,7 +30,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     port: PORT,
     overlay: { warnings: false, errors: true }, // 在浏览器上全屏显示编译的errors或warnings。
     publicPath: '/',
-    proxy: {},
+    proxyTable: {
+        // '/weapi': {
+        //   // 目标 API 地址
+        //   target: 'https://music.163.com',
+        //   // 如果要代理 websockets
+        //   ws: true,
+        //   changeOrigin: true
+        //   // 将主机标头的原点更改为目标URL
+        // },
+    },
     quiet: true, // necessary for FriendlyErrorsPlugin // 终端输出的只有初始启动信息。 webpack 的警告和错误是不输出到终端的
     watchOptions: {
       poll: false
