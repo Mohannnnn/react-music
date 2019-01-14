@@ -3,7 +3,7 @@ React Music WebApp，在听音乐的时候忽然想听腾格尔的钢铁之翼�
 
 ### 技术栈
 
-`react` + `react-router` + `ES6/7` + `webpack4` + `Ant Design` + `fetch/axios` + `scss`
+`React` + `React-router` + `Redux` + `React-redux` + `ES6/7` + `webpack4` + `Ant Design` + `Fetch/Axios` + `Scss`
 
 ### 目录结构
 ```bash
