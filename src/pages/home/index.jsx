@@ -2,13 +2,13 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2019-01-11 14:58:26 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-11 17:00:20
+ * @Last Modified time: 2019-01-14 15:38:35
  */
 import React from 'react';
 import {
     Row , Col , Layout,Input,Avatar,Menu
 } from 'antd';
-import {HashRouter as Router, Switch, Route, Redirect , Link} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Redirect , Link} from 'react-router-dom';
 import './index.scss';
 import HotList from '../hotList/index';
 import Recommend from '../recommend/index';
@@ -30,7 +30,7 @@ class Home extends React.Component{
         }
     }
     componentDidMount(){
-        console.log(this.props.match)
+        // console.log(this.props.match)
     }
     render(){
         return (
