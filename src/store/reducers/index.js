@@ -17,6 +17,18 @@ const userInfo = (state = states.userInfo, action) => {
             return state
     }
 }
+
+//首页推荐歌单
+const recommendList = (state = states.recommendList , action) =>{
+    switch (action.type) {
+        case actionsTypes.GET_RECOMMEND :
+            return action.data;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     userInfo,
+    recommendList
 })
