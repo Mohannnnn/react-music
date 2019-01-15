@@ -62,14 +62,14 @@ const webpackConfig = merge(baseWebpackConfig, {
         //删除Html注释
         removeComments: true,
         //去除空格
-        collapseWhitespace: true,
+        collapseWhitespace: false,
         //去除属性引号
-        removeAttributeQuotes: true
+        removeAttributeQuotes: false
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
+      chunksSortMode: 'auto'
     }),
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),

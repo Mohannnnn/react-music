@@ -26,7 +26,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     hot: true, // 热加载
     inline: true, //自动刷新
     open: true, //自动打开浏览器
-    host: HOST||'localhost',
+    host: HOST||'0.0.0.0',
     port: PORT,
     overlay: { warnings: false, errors: true }, // 在浏览器上全屏显示编译的errors或warnings。
     publicPath: '/',
