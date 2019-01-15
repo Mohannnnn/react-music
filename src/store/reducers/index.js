@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn]
  * @Date: 2018-12-27 17:02:13
  * @Last Modified by: wuhan
- * @Last Modified time: 2018-12-27 19:16:17
+ * @Last Modified time: 2019-01-14 23:27:19
  * des: redux数据计算中心
  */
 import { combineReducers } from 'redux';
@@ -18,17 +18,18 @@ const userInfo = (state = states.userInfo, action) => {
     }
 }
 
-//首页推荐歌单
-const recommendList = (state = states.recommendList , action) =>{
+//推荐歌单
+const albumList = (state = states.albumList , action) =>{
     switch (action.type) {
-        case actionsTypes.GET_RECOMMEND :
+        case actionsTypes.GET_ALBUMLIST :
             return action.data;
         default:
             return state;
     }
 }
 
+
 export default combineReducers({
     userInfo,
-    recommendList
+    albumList
 })

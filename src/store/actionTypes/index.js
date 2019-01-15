@@ -6,4 +6,4 @@
  * des: actions类型
  */
 export const UPDATE_USERINFO = 'UPDATE_USERINFO';
-export const GET_RECOMMEND = 'GET_RECOMMEND';
+export const GET_ALBUMLIST = 'GET_ALBUMLIST';

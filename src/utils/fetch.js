@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2018-09-19 21:16:31 
  * @Last Modified by: wuhan
- * @Last Modified time: 2018-12-27 17:15:52
+ * @Last Modified time: 2019-01-14 23:01:53
  */
 // 封装fetch请求方法
 export default async({url = '' , type = 'GET' , data = {}} = {}) => {
@@ -21,7 +21,7 @@ export default async({url = '' , type = 'GET' , data = {}} = {}) => {
     if(window.fetch) {
         let options = {
             method : type,
-            credentials : 'include', //携带cookie
+            //credentials : 'include', //携带cookie
             mode : 'cors', 
             cache : 'force-cache',
             headers : {

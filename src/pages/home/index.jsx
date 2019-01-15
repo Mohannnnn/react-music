@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2019-01-11 14:58:26 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-14 15:38:35
+ * @Last Modified time: 2019-01-14 23:51:02
  */
 import React from 'react';
 import {
@@ -36,7 +36,7 @@ class Home extends React.Component{
         return (
             <div className="home">
                 <Layout>
-                    <Header style={{background:'#1890ff',padding:'0 10px'}}>
+                    <Header style={{background:'#1890ff',padding:'0 10px', position: 'sticky', top: 0,left: 0}}>
                         <Row align={'middle'} type={'flex'} justify={'space-between'}>
                             <Col>
                                 <Avatar src={'../../assets/images/logo.svg'}></Avatar>
@@ -66,7 +66,7 @@ class Home extends React.Component{
                         </Switch>
                     </Content>
                     <Footer style={{background:'#fff',padding:'0 10px'}}>
-                        Footers
+                        
                     </Footer>
                 </Layout>
             </div>

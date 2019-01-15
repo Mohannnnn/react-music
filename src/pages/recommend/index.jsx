@@ -3,9 +3,11 @@ import {
     Row , Col ,
 } from 'antd';
 import { connect } from 'react-redux';
-import { getRecommend  as recommendListAction } from '../../store/actions/index.js';
+import { getAlbumList as albumListAction } from '../../store/actions/index.js';
 import { bindActionCreators } from 'redux';
 import {HashRouter as Router, Switch, Route, Redirect , Link} from 'react-router-dom';
+
+import { getAlbumList } from "../../api/getData.js";
 import './index.scss';
 
 class Recommend extends React.Component{
@@ -16,29 +18,31 @@ class Recommend extends React.Component{
         }
     }
     componentWillMount(){
-        console.log(this.props.recommendList.data);
+        getAlbumList().then(res => {
+            this.props.albumListDispatchs(res.data);
+        })
     }
+    // shoudComponentUpdate(preProps , prevState){
+    //     console.log(preProps , prevState);
+    //     return true;
+    // }
     render(){
         return(
             <section className="recommend">
                 <Row style={{paddingLeft:'10px' , margin: '20px 0 10px 0', fontSize:'17px',borderLeft:'4px solid #1890ff'}}>推荐歌单</Row>
-                <Row gutter={20} type={'flex'} justify={'space-between'}>
+                <Row gutter={10} type={'flex'} justify={'space-between'}>
                     {
-                        this.props.recommendList.data._list.map((ele) => {
+                        this.props.albumList.map((ele , index) => {
                             return (
-                                ele.map((el ,index) => {
-                                    return (
-                                        <Col span={8} style={{paddingBottom: '16px'}} key={index}>
-                                            <div className="music-list">
-                                                <a href={`https://music.163.com/m/playlist?id=${el.id}`}>
-                                                    <span className="listen">{el.playCount}</span>
-                                                    <img alt="" src={el.picUrl} />
-                                                    <div className="music-text">{el.name}</div>
-                                                </a>
-                                            </div>
-                                        </Col>
-                                    )
-                                })
+                                <Col span={8} style={{paddingBottom: '10px'}} key={index}>
+                                    <div className="music-list">
+                                        <Link to={`/album?id=${ele.id}`}>
+                                            <span className="listen">{ele.playCount}</span>
+                                            <img alt="" src={ele.coverImgUrl} />
+                                            <div className="music-text">{ele.title}</div>
+                                        </Link>
+                                    </div>
+                                </Col>
                             )
                         })
                     }
@@ -53,7 +57,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        recommendListDispatchs : bindActionCreators(recommendListAction , dispatch)
+        albumListDispatchs : bindActionCreators(albumListAction , dispatch)
     }
 }
-export default connect(mapStateToProps)(Recommend);
+export default connect(mapStateToProps,mapDispatchToProps)(Recommend);

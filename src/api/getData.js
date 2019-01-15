@@ -2,17 +2,20 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2018-09-19 21:16:14 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-09 20:02:17
+ * @Last Modified time: 2019-01-14 23:23:31
  */
 
-import fetch from './fetch';
+import fetch from '../utils/fetch';
 import requestUrl from './requestUrl';
  
-//获取位置信息
-export const getCurLocation = (latitude = 40.032344 , longitude = 116.281948) => fetch({
-    url : requestUrl.currentLocation,
+//获取热门歌单列表
+export const getAlbumList = () => fetch({
+    url : requestUrl.albumList,
     data : {
-        latitude : latitude ,
-        longitude : longitude
+        key : 579621905,
+        cat : '全部',
+        limit : 12,
+        offset : 0 ,
+        order : 'hot'
     }
 })
