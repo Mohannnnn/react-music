@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development --config build/webpack.dev.conf.js",
     "build": "webpack -p --mode production --progress --config ./build/webpack.prod.conf.js",
-    "analysis": "cross-env NODE_ENV=analysis webpack -p --mode production --progress --config ./build/webpack.prod.conf.js "
+    "analysis": "cross-env NODE_ENV=analysis webpack -p --mode production --progress --config ./build/webpack.prod.conf.js ",
+    "deploy": "npm run build && node ./deploy.js"
   },
   "lint-staged": {
     "*.js": [
