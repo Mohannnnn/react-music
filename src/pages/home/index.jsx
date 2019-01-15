@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2019-01-11 14:58:26 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-14 23:51:02
+ * @Last Modified time: 2019-01-15 18:21:47
  */
 import React from 'react';
 import {
@@ -36,10 +36,10 @@ class Home extends React.Component{
         return (
             <div className="home">
                 <Layout>
-                    <Header style={{background:'#1890ff',padding:'0 10px', position: 'sticky', top: 0,left: 0}}>
+                    <Header style={{background:'#1890ff',padding:'0 10px', position: 'sticky', top: 0,left: 0 ,zIndex:10}}>
                         <Row align={'middle'} type={'flex'} justify={'space-between'}>
                             <Col>
-                                <Avatar src={'../../assets/images/logo.svg'}></Avatar>
+                                <Avatar src={'../../assets/images/logo.svg'} size={'large'}></Avatar>
                             </Col>
                             <Col span={7} style={{color:'#fff',fontSize:'16px'}}>{this.state.title}</Col>
                             <Col span={14}>
@@ -47,7 +47,7 @@ class Home extends React.Component{
                             </Col>
                         </Row>
                     </Header>
-                    <Content style={{background:'#fff'}}>
+                    <Content style={{background:'#fff' , overflow:'hidden'}}>
                         <Menu mode='horizontal' defaultSelectedKeys={[this.state.routes.recommend]} style={{display:'flex',justifyContent:'space-between'}}>
                             <Menu.Item key={this.state.routes.recommend}>
                                 <Link to={`${this.props.match.url}/${this.state.routes.recommend}`}>推荐音乐</Link>

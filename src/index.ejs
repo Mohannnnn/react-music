@@ -4,21 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-
   <title><%= htmlWebpackPlugin.options.title %></title>
-  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
-
-  <% for (var chunk in htmlWebpackPlugin.files.css) { %>
+  <link rel="shortcut icon" href="./assets/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+  <!-- <% for (var chunk in htmlWebpackPlugin.files.css) { %>
   <link rel="preload" href="<%= htmlWebpackPlugin.files.css[chunk] %>"  as="style">
-  <% } %>
-  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+  <% } %> -->
+  <!-- <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
   <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" as="script">
-  <% } %>
-
-  <base href="/">
+  <% } %> -->
 </head>
 <body>
-<div id="root"></div>
+  <div id="root"></div>
 </body>
 </html>
