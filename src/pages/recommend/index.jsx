@@ -5,7 +5,7 @@ import {
 import { connect } from 'react-redux';
 import { getAlbumList as albumListAction } from '../../store/actions/index.js';
 import { bindActionCreators } from 'redux';
-import {HashRouter as Router, Switch, Route, Redirect , Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { getAlbumList } from "../../api/getData.js";
 import './index.scss';
