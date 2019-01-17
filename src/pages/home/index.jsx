@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2019-01-11 14:58:26 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-17 10:36:31
+ * @Last Modified time: 2019-01-17 20:14:05
  */
 import React from 'react';
 import {
@@ -31,7 +31,6 @@ class Home extends React.Component{
         }
     }
     componentWillMount(){
-        console.log(this.props.location.pathname.slice(6))
         const pathname = this.props.location.pathname.slice(6);
         if(this.state.routes[pathname]){
             this.setState({

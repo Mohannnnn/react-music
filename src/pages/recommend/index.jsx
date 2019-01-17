@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
 import { getAlbumList } from "../../api/getData.js";
+import Loading from '../../components/Loading';
 import './index.scss';
 
 class Recommend extends React.Component{
@@ -22,17 +23,13 @@ class Recommend extends React.Component{
             this.props.albumListDispatchs(res.data);
         })
     }
-    // shoudComponentUpdate(preProps , prevState){
-    //     console.log(preProps , prevState);
-    //     return true;
-    // }
     render(){
         return(
             <section className="recommend">
                 <Row style={{paddingLeft:'10px' , margin: '20px 0 10px 0', fontSize:'17px',borderLeft:'4px solid #1890ff'}}>推荐歌单</Row>
                 <Row gutter={10} type={'flex'} justify={'space-between'}>
                     {
-                        this.props.albumList.map((ele , index) => {
+                        this.props.albumList == '' ? <Loading /> : this.props.albumList.map((ele , index) => {
                             return (
                                 <Col span={8} style={{paddingBottom: '10px'}} key={index}>
                                     <div className="music-list">

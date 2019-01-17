@@ -2,12 +2,10 @@ import React from 'react';
 import {
     Row , Col , Icon
 } from 'antd';
-import { connect } from 'react-redux';
-import { getAlbumList as albumListAction } from '../../store/actions/index.js';
-import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
-import { getSongList } from "../../api/getData.js";
+import { getSongList } from '../../api/getData.js';
+import Loading from '../../components/Loading';
 import './index.scss';
 
 class HotList extends React.Component{
@@ -36,7 +34,7 @@ class HotList extends React.Component{
                 </Row>
                 <Row>
                     {
-                        !this.state.songList.songs ? '' : this.state.songList.songs.map((ele , index ) => {
+                        !this.state.songList.songs? <Loading/> : this.state.songList.songs.map((ele , index ) => {
                             if(index < 20) {
                                 return (
                                     <Link to={`/song?id=${ele.id}`} key={index}>                                    
