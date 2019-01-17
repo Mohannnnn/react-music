@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2019-01-11 14:58:26 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-16 11:21:43
+ * @Last Modified time: 2019-01-17 10:36:31
  */
 import React from 'react';
 import {
@@ -22,6 +22,7 @@ class Home extends React.Component{
         super(props);
         this.state = {
             title: 'Music',
+            curRoute : 'recommend',
             routes :{
                 recommend : 'recommend',
                 hotlist : 'hotlist',
@@ -29,8 +30,14 @@ class Home extends React.Component{
             }
         }
     }
-    componentDidMount(){
-        // console.log(this.props)
+    componentWillMount(){
+        console.log(this.props.location.pathname.slice(6))
+        const pathname = this.props.location.pathname.slice(6);
+        if(this.state.routes[pathname]){
+            this.setState({
+                curRoute : this.state.routes[pathname]
+            })
+        }
     }
     render(){
         return (
@@ -48,7 +55,7 @@ class Home extends React.Component{
                         </Row>
                     </Header>
                     <Content style={{background:'#fff' , overflow:'hidden'}}>
-                        <Menu mode='horizontal' defaultSelectedKeys={[this.state.routes.recommend]} style={{display:'flex',justifyContent:'space-between'}}>
+                        <Menu mode='horizontal' defaultSelectedKeys={[this.state.curRoute]} style={{display:'flex',justifyContent:'space-between'}}>
                             <Menu.Item key={this.state.routes.recommend}>
                                 <Link to={`${this.props.match.url}/${this.state.routes.recommend}`}>推荐音乐</Link>
                             </Menu.Item>
