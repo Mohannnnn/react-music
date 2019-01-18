@@ -19,6 +19,7 @@ class Recommend extends React.Component{
         }
     }
     componentWillMount(){
+        //获取歌单
         getAlbumList().then(res => {
             this.props.albumListDispatchs(res.data);
         })

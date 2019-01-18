@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2019-01-11 14:58:26 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-17 20:14:05
+ * @Last Modified time: 2019-01-17 22:35:58
  */
 import React from 'react';
 import {
@@ -30,13 +30,17 @@ class Home extends React.Component{
             }
         }
     }
-    componentWillMount(){
-        const pathname = this.props.location.pathname.slice(6);
-        if(this.state.routes[pathname]){
-            this.setState({
-                curRoute : this.state.routes[pathname]
-            })
+    static getDerivedStateFromProps(nextProps,prevState){
+        const pathname = nextProps.location.pathname.slice(6);
+        if(prevState.routes[pathname]){
+            return {
+                curRoute : prevState.routes[pathname]
+            }
         }
+        return null;
+    }
+    shouldComponentUpdate(nextProps, nextState){
+        return true;
     }
     render(){
         return (
@@ -49,12 +53,14 @@ class Home extends React.Component{
                             </Col>
                             <Col span={7} style={{color:'#fff',fontSize:'16px'}}>{this.state.title}</Col>
                             <Col span={14}>
-                                <Search placeholder="请输入搜索内容" onSearch={value => console.log(value)}></Search>
+                                <Link to={`${this.props.match.url}/${this.state.routes.search}`}>
+                                    <Search placeholder="搜索" disabled></Search>
+                                </Link>
                             </Col>
                         </Row>
                     </Header>
                     <Content style={{background:'#fff' , overflow:'hidden'}}>
-                        <Menu mode='horizontal' defaultSelectedKeys={[this.state.curRoute]} style={{display:'flex',justifyContent:'space-between'}}>
+                        <Menu mode='horizontal'  selectedKeys={[this.state.curRoute]} style={{display:'flex',justifyContent:'space-between'}}>
                             <Menu.Item key={this.state.routes.recommend}>
                                 <Link to={`${this.props.match.url}/${this.state.routes.recommend}`}>推荐音乐</Link>
                             </Menu.Item>
