@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn]
  * @Date: 2018-12-27 17:02:13
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-14 23:27:19
+ * @Last Modified time: 2019-01-19 19:06:55
  * des: redux数据计算中心
  */
 import { combineReducers } from 'redux';
@@ -14,7 +14,7 @@ const userInfo = (state = states.userInfo, action) => {
         case actionsTypes.UPDATE_USERINFO : 
             return action.data;
         default:
-            return state
+            return state;
     }
 }
 
