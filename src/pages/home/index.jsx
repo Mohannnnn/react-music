@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2019-01-11 14:58:26 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-17 22:35:58
+ * @Last Modified time: 2019-01-20 20:58:37
  */
 import React from 'react';
 import {
@@ -77,9 +77,6 @@ class Home extends React.Component{
                             <Route path={`${this.props.match.path}/:${this.state.routes.recommend}?`} exact component={Recommend}/>
                         </Switch>
                     </Content>
-                    <Footer style={{background:'#fff',padding:'0 10px'}}>
-                        
-                    </Footer>
                 </Layout>
             </div>
         )
