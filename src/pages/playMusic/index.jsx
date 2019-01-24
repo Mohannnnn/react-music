@@ -15,7 +15,7 @@ class PlayMusic extends React.Component{
     render(){
         return(
             <section className="paly-music">
-                    paly-music
+                    播放音乐
             </section>
         )
     }
