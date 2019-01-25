@@ -15,7 +15,7 @@ class SongMenu extends React.Component{
     render(){
         return(
             <section className="song-menu">
-                    song-menu
+                歌单详情
             </section>
         )
     }

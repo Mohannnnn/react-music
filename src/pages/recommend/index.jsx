@@ -34,7 +34,7 @@ class Recommend extends React.Component{
                             return (
                                 <Col span={8} style={{paddingBottom: '10px'}} key={index}>
                                     <div className="music-list">
-                                        <Link to={`/album?id=${ele.id}`}>
+                                        <Link to={`/albumdetail?id=${ele.id}`}>
                                             <span className="listen">{ele.playCount}</span>
                                             <img alt="" src={ele.coverImgUrl} />
                                             <div className="music-text">{ele.title}</div>
