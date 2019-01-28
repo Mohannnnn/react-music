@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2018-09-19 21:16:14 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-16 10:37:36
+ * @Last Modified time: 2019-01-27 16:17:18
  */
 
 import fetch from '../utils/fetch';
@@ -19,6 +19,15 @@ export const getAlbumList = ({limit = 12 , order = 'hot'} = {}) => fetch({
         order : order
     }
 })
+
+//歌单详情
+export const getAlbumMsg = ({ id = 526307800 } = {}) => fetch({
+    url : requestUrl.albumList,
+    data : {
+        key : 579621905,
+        id : id
+    }
+}) 
 
 //获取歌曲列表
 export const getSongList = ({limit = 20 , id = 3778678} = {}) => fetch({
