@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2018-09-19 21:16:14 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-27 16:17:18
+ * @Last Modified time: 2019-01-30 14:05:03
  */
 
 import fetch from '../utils/fetch';
@@ -20,14 +20,6 @@ export const getAlbumList = ({limit = 12 , order = 'hot'} = {}) => fetch({
     }
 })
 
-//歌单详情
-export const getAlbumMsg = ({ id = 526307800 } = {}) => fetch({
-    url : requestUrl.albumList,
-    data : {
-        key : 579621905,
-        id : id
-    }
-}) 
 
 //获取歌曲列表
 export const getSongList = ({limit = 20 , id = 3778678} = {}) => fetch({
@@ -46,5 +38,47 @@ export const getSongMsg = ({id = 516728102} = {}) => fetch({
     data : {
         key: 579621905,
         id : id
+    }
+})
+
+//网易云歌单搜索
+// 1. 音乐搜索:type=song
+// 2. 专辑搜索:type=album
+// 3. 歌单搜索:type=list
+export const getNetEaseSearch = ({ s = '', type = 'song' , limit = 10 } = {}) => fetch({
+    url : requestUrl.netEaseSearch,
+    data : {
+        key: 579621905,
+        s : s,
+        type : type,
+        limit : limit,
+        offset : 0
+    }
+}) 
+
+//QQ音乐歌单搜索
+// 1. 音乐搜索:type=song
+// 2. 专辑搜索:type=album
+// 3. 用户搜索:type=user
+export const getQqSearch = ({ s = '', type = 'song' , limit = 10 } = {}) => fetch({
+    url : requestUrl.qqSearch,
+    data : {
+        key: 579621905,
+        s : s,
+        type : type,
+        limit : limit,
+        offset : 0
+    }
+}) 
+
+//酷狗歌单搜索
+export const getKugouSearch = ({ s = '', limit = 10 } = {}) => fetch({
+    url : requestUrl.kugouSearch,
+    data : {
+        format : 'json' ,
+        keyword : s,
+        page : 1 ,
+        pagesize : limit ,
+        showtype : 1
     }
 })
