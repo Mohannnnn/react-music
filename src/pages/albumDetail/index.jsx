@@ -34,9 +34,10 @@ class AlbumDetail extends React.Component{
                     id : albumId,
                     songMsg : res.data
                 })
-            }else{
-                this.getSongs(albumId);
             }
+            // else{
+            //     this.getSongs(albumId);
+            // }
         });
     }
     render(){
