@@ -2,10 +2,11 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2018-09-19 21:16:14 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-30 14:05:03
+ * @Last Modified time: 2019-01-31 18:01:18
  */
 
 import fetch from '../utils/fetch';
+import ajax from '../utils/ajax';
 import requestUrl from './requestUrl';
  
 //获取热门歌单列表
@@ -72,13 +73,16 @@ export const getQqSearch = ({ s = '', type = 'song' , limit = 10 } = {}) => fetc
 }) 
 
 //酷狗歌单搜索
-export const getKugouSearch = ({ s = '', limit = 10 } = {}) => fetch({
+export const getKugouSearch = ({ type = 'get' , dataType = 'json' , success = function(){} , data = {keyword : '', pagesize : 10}} = {}) => ajax({
+    type : type,
     url : requestUrl.kugouSearch,
-    data : {
+    dataType : dataType,
+    success:success,
+    data : Object.assign({
         format : 'json' ,
-        keyword : s,
+        keyword : '',
         page : 1 ,
-        pagesize : limit ,
+        pagesize : 10 ,
         showtype : 1
-    }
+    },data)
 })
