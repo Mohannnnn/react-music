@@ -18,7 +18,7 @@ class Recommend extends React.Component{
 
         }
     }
-    componentWillMount(){
+    componentDidMount(){
         //获取歌单
         getAlbumList().then(res => {
             this.props.albumListDispatchs(res.data);
@@ -34,7 +34,7 @@ class Recommend extends React.Component{
                             return (
                                 <Col span={8} style={{paddingBottom: '10px'}} key={index}>
                                     <div className="music-list">
-                                        <Link to={`/albumdetail?id=${ele.id}`}>
+                                        <Link to={{pathname : '/albumdetail' , search : `?id=${ele.id}` , query : {id : ele.id }}}>
                                             <span className="listen">{ele.playCount}</span>
                                             <img alt="" src={ele.coverImgUrl} />
                                             <div className="music-text">{ele.title}</div>
