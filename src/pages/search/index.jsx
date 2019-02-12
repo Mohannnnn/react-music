@@ -40,21 +40,21 @@ class Search extends React.Component{
                 searchStorageArr : getLocalStorage(this.state.searchStorageName)
             })
             //网易云
-            // getNetEaseSearch({s : value}).then(res => {
-            //     if(res.code == 200) {
-            //         this.setState({
-            //             searchNetEaseList : res.data
-            //         })
-            //     }
-            // })
-            // // //QQ
-            // getQqSearch({s : value}).then(res => {
-            //     if(res.code == 200) {
-            //         this.setState({
-            //             searchQqList : res.data
-            //         })
-            //     }
-            // })
+            getNetEaseSearch({s : value}).then(res => {
+                if(res.code == 200) {
+                    this.setState({
+                        searchNetEaseList : res.data
+                    })
+                }
+            })
+            //QQ
+            getQqSearch({s : value}).then(res => {
+                if(res.code == 200) {
+                    this.setState({
+                        searchQqList : res.data
+                    })
+                }
+            })
             //酷狗
             getKugouSearch({
                 type : 'get',
