@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-    Row , Col ,Input ,Icon
-} from 'antd';
+import { Row , Col ,Input ,Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import { setLocalStorage , getLocalStorage , delLocalStorage } from '../../utils/tools.js';
 import { getKugouSearch , getNetEaseSearch , getQqSearch } from '../../api/getData.js';
