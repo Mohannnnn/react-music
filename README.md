@@ -58,4 +58,9 @@ yarn dev/npm run dev
 ```
 yarn build/npm run build
 ```
+### 第三方接口
+- 1.网易云: [https://www.bzqll.com/2018/10/39.html](https://www.bzqll.com/2018/10/39.html)
+- 2.QQ: [https://www.bzqll.com/2019/01/262.html](https://www.bzqll.com/2019/01/262.html)
+- 3.酷狗: [https://www.bzqll.com/2019/01/259.html](https://www.bzqll.com/2019/01/259.html)
 
+非常感谢该博主！！！
