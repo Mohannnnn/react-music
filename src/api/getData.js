@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2018-09-19 21:16:14 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-31 18:01:18
+ * @Last Modified time: 2019-02-18 16:06:41
  */
 
 import fetch from '../utils/fetch';
@@ -73,16 +73,31 @@ export const getQqSearch = ({ s = '', type = 'song' , limit = 10 } = {}) => fetc
 }) 
 
 //酷狗歌单搜索
-export const getKugouSearch = ({ type = 'get' , dataType = 'json' , success = function(){} , data = {keyword : '', pagesize : 10}} = {}) => ajax({
-    type : type,
+// 1. 音乐搜索:type=song
+// 2. 专辑搜索:type=album
+// 3. 用户搜索:type=user
+export const getKugouSearch = ({ s = '', type = 'song' , limit = 10 } = {}) => fetch({
     url : requestUrl.kugouSearch,
-    dataType : dataType,
-    success:success,
-    data : Object.assign({
-        format : 'json' ,
-        keyword : '',
-        page : 1 ,
-        pagesize : 10 ,
-        showtype : 1
-    },data)
+    data : {
+        key: 579621905,
+        s : s,
+        type : type,
+        limit : limit,
+        offset : 0
+    }
 })
+
+//酷狗歌单搜索
+// export const getKugouSearch = ({ type = 'get' , dataType = 'json' , success = function(){} , data = {keyword : '', pagesize : 10}} = {}) => ajax({
+//     type : type,
+//     url : requestUrl.kugouSearch,
+//     dataType : dataType,
+//     success:success,
+//     data : Object.assign({
+//         format : 'json' ,
+//         keyword : '',
+//         page : 1 ,
+//         pagesize : 10 ,
+//         showtype : 1
+//     },data)
+// })
