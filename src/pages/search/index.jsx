@@ -14,6 +14,7 @@ class Search extends React.Component{
             inputSearchValue : '周杰伦',
             searchStorageName : 'searchStorage',
             searchStorageArr : [],
+            initSearchMusic : false,
             searchNetEaseList : [],
             searchQqList : [],
             searchKugouList : [],
@@ -23,7 +24,7 @@ class Search extends React.Component{
     }
     static getDerivedStateFromProps(nextProps,prevState){
         if(prevState.searchStorageArr.length == 0){
-            console.log(nextProps,prevState)
+            // console.log(nextProps,prevState)
             return {
                 searchStorageArr : getLocalStorage(prevState.searchStorageName)
             }
@@ -35,7 +36,8 @@ class Search extends React.Component{
             console.log(value)
             setLocalStorage(value , this.state.searchStorageName);
             this.setState({
-                searchStorageArr : getLocalStorage(this.state.searchStorageName)
+                searchStorageArr : getLocalStorage(this.state.searchStorageName),
+                initSearchMusic : true
             })
             //网易云
             getNetEaseSearch({s : value}).then(res => {
@@ -161,7 +163,7 @@ class Search extends React.Component{
                 </Row>
                 <Row type='flex' align='top' justify='center' style={{flexDirection:'column',padding:'5px'}}>
                     {
-                        
+                        this.state.initSearchMusic == true && this.state.searchNetEaseList.length == 0 && this.state.searchQqList.length == 0 && this.state.searchKugouList.length == 0 ? <Loading/> : ''
                     }
                     {
                         this.state.searchNetEaseList.length == 0 ? '' : 
