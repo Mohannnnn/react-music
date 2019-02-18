@@ -54,25 +54,32 @@ class Search extends React.Component{
                 }
             })
             //酷狗
-            getKugouSearch({
-                type : 'get',
-                dataType : 'jsonp',
-                data : {
-                    format : 'json' ,
-                    keyword : value,
-                    page : 1 ,
-                    pagesize : 10 ,
-                    showtype : 1
-                },
-                success: (res) => {
-                    if(res.data.info.length > 0){
-                        this.setState({
-                            searchKugouList : res.data.info
-                        })
-                        console.log(res.data.info)
-                    }
+            getKugouSearch({s : value}).then(res => {
+                if(res.code == 200) {
+                    this.setState({
+                        searchKugouList : res.data
+                    })
                 }
             })
+            // getKugouSearch({
+            //     type : 'get',
+            //     dataType : 'jsonp',
+            //     data : {
+            //         format : 'json' ,
+            //         keyword : value,
+            //         page : 1 ,
+            //         pagesize : 10 ,
+            //         showtype : 1
+            //     },
+            //     success: (res) => {
+            //         if(res.data.info.length > 0){
+            //             this.setState({
+            //                 searchKugouList : res.data.info
+            //             })
+            //             console.log(res.data.info)
+            //         }
+            //     }
+            // })
         }
     }
     handleChange(e) {
@@ -121,7 +128,9 @@ class Search extends React.Component{
             return (
                 this.state.searchKugouList.map((ele , index ) => {
                     if(index < 30 ) {
-                        <Common ele={ele} index={index} key={index}></Common>
+                        return (
+                            <Common ele={ele} index={index} key={index}></Common>
+                        )
                     }
                 })
             )
@@ -152,6 +161,9 @@ class Search extends React.Component{
                 </Row>
                 <Row type='flex' align='top' justify='center' style={{flexDirection:'column',padding:'5px'}}>
                     {
+                        
+                    }
+                    {
                         this.state.searchNetEaseList.length == 0 ? '' : 
                         <section style={{width:'100%'}}>
                             <Col style={{fontSize:'17px',color:'#333'}}>网易云搜索结果</Col>
@@ -164,6 +176,13 @@ class Search extends React.Component{
                         <section style={{width:'100%'}}>
                             <Col style={{fontSize:'17px',color:'#333'}}>QQ音乐搜索结果</Col>
                             <QqComponent></QqComponent>
+                        </section>
+                    }
+                    {
+                        this.state.searchKugouList.length == 0 ? '' :
+                        <section style={{width:'100%'}}>
+                            <Col style={{fontSize:'17px',color:'#333'}}>酷狗音乐搜索结果</Col>
+                            <KugouComponent></KugouComponent>
                         </section>
                     }
                 </Row>
