@@ -65,7 +65,7 @@ class AlbumDetail extends React.Component{
                     !this.state.songMsg.songs? <Loading/> : this.state.songMsg.songs.map((ele , index ) => {
                         if(index < 30) {
                             return (
-                                <Link to={{pathname : '/songdetail' , query : {id : ele.id } , search : `?id=${ele.id}`}} key={index}>                                    
+                                <Link to={{pathname : '/songdetail' , query : {id : ele.id , from : 'netease' } , search : `?id=${ele.id}&from=netease`}} key={index}>                                    
                                     <Row type={'flex'}  align={'middle'} style={{padding:'5px 0 5px 10px'}}>
                                         <Col xs={{span: 2 }} sm={{span: 1}} style={{fontSize:'18px',color:'#999'}}>{index+1}</Col>
                                         <Col xs={{span: 22 }} sm={{span: 23}} style={{borderBottom:'1px solid rgba(170, 170, 170, 0.3)', paddingRight:'10px'}}>                                        
