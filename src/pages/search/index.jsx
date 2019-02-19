@@ -14,6 +14,7 @@ class Search extends React.Component{
             inputSearchValue : '周杰伦',
             searchStorageName : 'searchStorage',
             searchStorageArr : [],
+            searchStorageMaxLength : 8,
             initSearchMusic : false,
             searchNetEaseList : [],
             searchQqList : [],
@@ -33,14 +34,22 @@ class Search extends React.Component{
     }
     startSearch(value){
         if(value != '') {
-            console.log(value)
+            // console.log('搜索关键字:', value)
             setLocalStorage(value , this.state.searchStorageName);
+            const length = getLocalStorage(this.state.searchStorageName).length;
+            if(length > this.state.searchStorageMaxLength){
+                const storeageArr = getLocalStorage(this.state.searchStorageName).slice(length - this.state.searchStorageMaxLength);
+                delLocalStorage(this.state.searchStorageName);
+                storeageArr.forEach(ele => {
+                    setLocalStorage(ele , this.state.searchStorageName);
+                })
+            }
             this.setState({
                 searchStorageArr : getLocalStorage(this.state.searchStorageName),
                 initSearchMusic : true
             })
             //网易云
-            getNetEaseSearch({s : value}).then(res => {
+            getNetEaseSearch({s : value , limit : 20}).then(res => {
                 if(res.code == 200) {
                     this.setState({
                         searchNetEaseList : res.data
@@ -48,7 +57,7 @@ class Search extends React.Component{
                 }
             })
             //QQ
-            getQqSearch({s : value}).then(res => {
+            getQqSearch({s : value , limit : 20}).then(res => {
                 if(res.code == 200) {
                     this.setState({
                         searchQqList : res.data
@@ -56,7 +65,7 @@ class Search extends React.Component{
                 }
             })
             //酷狗
-            getKugouSearch({s : value}).then(res => {
+            getKugouSearch({s : value , limit : 20}).then(res => {
                 if(res.code == 200) {
                     this.setState({
                         searchKugouList : res.data
