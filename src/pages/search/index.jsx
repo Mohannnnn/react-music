@@ -97,9 +97,9 @@ class Search extends React.Component{
         console.log(e.target)
     }
     render(){
-        const Common = ({ele , index}) => {
+        const Common = ({ele , index , from}) => {
             return (
-                <Link to={{pathname : '/songdetail' , query : {id : ele.id } , search : `?id=${ele.id}`}} key={index}>                                    
+                <Link to={{pathname : '/songdetail' , query : {id : ele.id , from : from} , search : `?id=${ele.id}&from=${from}`}} key={index}>                                    
                     <Row type={'flex'}  align={'middle'} style={{padding:'5px 0 5px 10px'}}>
                         <Col xs={{span: 2 }} sm={{span: 1}} style={{fontSize:'18px',color:'#999'}}>{index+1}</Col>
                         <Col xs={{span: 22 }} sm={{span: 23}} style={{borderBottom:'1px solid rgba(170, 170, 170, 0.3)', paddingRight:'10px'}}>                                        
@@ -119,7 +119,7 @@ class Search extends React.Component{
             return (
                 this.state.searchNetEaseList.map((ele , index ) => {
                     if(index < 30) {
-                        return <Common ele={ele} index={index} key={index}></Common>
+                        return <Common ele={ele} index={index} from='netease' key={index}></Common>
                     }
                 })
             )
@@ -129,7 +129,7 @@ class Search extends React.Component{
                 this.state.searchQqList.map((ele , index ) => {
                     if(index < 30) {
                         return (
-                            <Common ele={ele} index={index} key={index}></Common>
+                            <Common ele={ele} index={index} from='qq' key={index}></Common>
                         )
                     }
                 })
@@ -140,7 +140,7 @@ class Search extends React.Component{
                 this.state.searchKugouList.map((ele , index ) => {
                     if(index < 30 ) {
                         return (
-                            <Common ele={ele} index={index} key={index}></Common>
+                            <Common ele={ele} index={index} from='kugou' key={index}></Common>
                         )
                     }
                 })
