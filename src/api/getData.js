@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2018-09-19 21:16:14 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-02-18 16:06:41
+ * @Last Modified time: 2019-02-19 14:06:05
  */
 
 import fetch from '../utils/fetch';
@@ -33,9 +33,27 @@ export const getSongList = ({limit = 20 , id = 3778678} = {}) => fetch({
     }
 })
 
-//获取歌曲信息
-export const getSongMsg = ({id = 516728102} = {}) => fetch({
-    url : requestUrl.songMsg,
+//获取网易云歌曲信息
+export const getNetEaseSongMsg = ({id = 516728102} = {}) => fetch({
+    url : requestUrl.netEaseSongMsg,
+    data : {
+        key: 579621905,
+        id : id
+    }
+})
+
+//获取QQ歌曲信息
+export const getQqSongMsg = ({id = 516728102} = {}) => fetch({
+    url : requestUrl.qqSongMsg,
+    data : {
+        key: 579621905,
+        id : id
+    }
+})
+
+//获取酷狗歌曲信息
+export const getKuGouSongMsg = ({id = 516728102} = {}) => fetch({
+    url : requestUrl.kuGouSongMsg,
     data : {
         key: 579621905,
         id : id
