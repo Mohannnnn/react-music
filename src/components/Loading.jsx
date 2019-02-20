@@ -1,8 +1,7 @@
 import React from 'react';
 import {
-    Row  , Icon
+    Row  , Icon , Spin
 } from 'antd';
-
 
 class Loading extends React.Component{
     constructor(props){
@@ -14,7 +13,8 @@ class Loading extends React.Component{
     render(){
         return(
             <Row type={'flex'} justify={'center'} align={'middle'} style={{padding:'50px',width: '100%'}}>
-                <Icon type='loading' style={{fontSize:'35px' , color: '#7caeff'}}/>
+                {/* <Icon type='loading' style={{fontSize:'35px' , color: '#7caeff'}}/> */}
+                <Spin tip="Loading..." />
             </Row>
         )
     }
