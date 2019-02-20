@@ -11,7 +11,7 @@ React Music WebApp，在听音乐的时候忽然想听腾格尔的钢铁之翼�
 
 ### 技术栈
 
-`React` + `React-router` + `Redux` + `React-redux` + `ES6/7` + `webpack4` + `Ant Design` + `Fetch/Axios` + `Scss`
+`React` + `React-router` + `Redux` + `React-redux` + `ES6/7` + `webpack4` + `Ant Design` + `Ant Motion` + `Fetch/Axios` + `Scss`
 
 ### 目录结构
 ```bash
@@ -62,5 +62,4 @@ yarn build/npm run build
 - 1.网易云: [https://www.bzqll.com/2018/10/39.html](https://www.bzqll.com/2018/10/39.html)
 - 2.QQ: [https://www.bzqll.com/2019/01/262.html](https://www.bzqll.com/2019/01/262.html)
 - 3.酷狗: [https://www.bzqll.com/2019/01/259.html](https://www.bzqll.com/2019/01/259.html)
-
-非常感谢该博主！！！
+非常感谢该博主，打Call！！！
