@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2018-12-29 14:10:20 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-15 18:18:27
+ * @Last Modified time: 2019-02-19 22:50:45
  */
 @charset "utf-8";
 @media screen and (min-width: 750px) {
@@ -11,6 +11,12 @@
         margin: 0 auto;
     }
 }
+#root{
+    width: 100%;
+    height: 100%;    
+}
 .app {
+    width: 100%;
+    height: 100%;
     background: #fdfdfd;
 }
