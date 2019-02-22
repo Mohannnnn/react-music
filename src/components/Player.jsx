@@ -3,7 +3,6 @@ import {
     Row  , Icon , Spin
 } from 'antd';
 
-
 class Player extends React.Component{
     constructor(props){
         super(props);
@@ -21,7 +20,7 @@ class Player extends React.Component{
     }
     render(){
         return(
-            <div style={{width: '640px',height: '360px',display:'none'}}>
+            <div style={{width: '100%',height: '50px',display:'none'}}>
                 <audio ref="audioMusic" src={this.state.curSongMsg.url} preload="auto" controls="" autoPlay="true" loop="false" style={{width: '100%', height: '100%', display: 'block'}}></audio>
             </div>  
         )
