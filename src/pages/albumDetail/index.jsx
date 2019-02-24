@@ -43,7 +43,7 @@ class AlbumDetail extends React.Component{
     render(){
         return(
             <section className="album-detail">
-                <Row className="head"  style={{padding: '30px 10px 30px 15px'}}>
+                <Row className="head"  style={{padding: '30px 10px 10px 15px'}}>
                     <div className="mask" style={{backgroundImage: `url(${this.state.songMsg.songListPic})`}}></div>
                     <Col xs={{span: 10 }} sm={{span: 6}} style={{postion:'relative',zIndex:2,}}>
                         <img src={this.state.songMsg.songListPic} alt="" style={{width:'126px',height:'126px'}}/>

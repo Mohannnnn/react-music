@@ -3,7 +3,7 @@ import {
     Row , Col ,
 } from 'antd';
 import { connect } from 'react-redux';
-import { getAlbumList as albumListAction } from '../../store/actions/index.js';
+import { updateAlbumList as albumListUpdateAction } from '../../store/actions/index.js';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ class Recommend extends React.Component{
     componentDidMount(){
         //获取歌单
         getAlbumList().then(res => {
-            this.props.albumListDispatchs(res.data);
+            this.props.albumListUpdateDispatch(res.data);
         })
     }
     render(){
@@ -51,11 +51,11 @@ class Recommend extends React.Component{
 }
 //注册store
 const mapStateToProps = (state) => {
-    return state;
+    return {albumList : state.albumList};
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        albumListDispatchs : bindActionCreators(albumListAction , dispatch)
+        albumListUpdateDispatch : bindActionCreators(albumListUpdateAction , dispatch)
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Recommend);
