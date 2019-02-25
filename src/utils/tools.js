@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2018-09-19 21:15:25 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-17 21:09:52
+ * @Last Modified time: 2019-02-25 18:13:19
  */
 //设置localStorage值
 export const setLocalStorage = (value, key) => {
@@ -38,3 +38,9 @@ export const delLocalStorage = (value) => {
     if(!!value) window.localStorage.removeItem(value , '');
 }
 
+//格式化时间
+export const formatTime = (value) => {
+    const minute = Math.floor(value/60) >10 ? Math.floor(value/60) : '0' + Math.floor(value/60);
+    const second = Math.floor(value%60) > 10 ? Math.floor(value%60) : '0' + Math.floor(value%60);
+    return minute + ':' + second;
+}
