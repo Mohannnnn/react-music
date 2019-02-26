@@ -74,6 +74,8 @@
     "prettier": "^1.14.2",
     "rc-banner-anim": "^2.2.2",
     "rc-queue-anim": "^1.6.11",
+    "rc-texty": "^0.2.0",
+    "rc-tween-one": "^2.3.3",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^7.1.0",
     "source-map-loader": "^0.2.3",

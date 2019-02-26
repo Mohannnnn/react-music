@@ -1,5 +1,5 @@
 import React from 'react';
-import { updateSongPlayCur as songPlayCurUpdateAction } from '../store/actions/index.js';
+import { updateSongPlayCur as songPlayCurUpdateAction, updateSongPlayTime as songPlayTimeUpdateAction} from '../store/actions/index.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getNetEaseSongMsg , getQqSongMsg ,getKuGouSongMsg } from "../api/getData.js";
@@ -7,7 +7,9 @@ import { getNetEaseSongMsg , getQqSongMsg ,getKuGouSongMsg } from "../api/getDat
 class Player extends React.Component{
     constructor(props){
         super(props);
-        this.state = {}
+        this.state = {
+            preTime : 0
+        }
         this.songToPlay = this.songToPlay.bind(this);
         this.songToPause = this.songToPause.bind(this);
         this.songTimeUpdate = this.songTimeUpdate.bind(this);
@@ -23,6 +25,10 @@ class Player extends React.Component{
             this.songToPlay();
         }else {
             this.songToPause();
+        }
+        if(this.props.songPlayCur != prevProps.songPlayCur){
+            //console.log(this.props.songPlayCur , prevProps.songPlayCur);
+            this.props.songPlayTimeUpdateDispatch(0);
         }
     }
     //播放
@@ -45,7 +51,18 @@ class Player extends React.Component{
     }
     //播放事件
     songTimeUpdate(){
-        // console.log('time'+this.refs.audioMusic.currentTime);
+        const nowTime =  new Date().getTime();
+        if(this.state.preTime == 0) {
+            this.setState({
+                preTime : nowTime
+            })
+        }else if(nowTime - this.state.preTime > 1000){
+            //console.log('time ' + Math.floor(this.refs.audioMusic.currentTime));
+            this.props.songPlayTimeUpdateDispatch(Math.floor(this.refs.audioMusic.currentTime));
+            this.setState({
+                preTime : nowTime
+            })
+        }
     }
     //播放结束
     songEnd(){
@@ -92,7 +109,7 @@ class Player extends React.Component{
     render(){
         return(
             <div style={{width: '100%',height: '50px',display:'none'}}>
-                <audio ref="audioMusic" onProgress={this.songProgress} onTimeUpdate={this.songTimeUpdate} onEnded={this.songEnd} src={this.props.songPlayCur.url? this.props.songPlayCur.url : ''} preload="auto" controls style={{width: '100%', height: '100%', display: 'block'}}></audio>
+                <audio className="audio-music" ref="audioMusic" onProgress={this.songProgress} onTimeUpdate={this.songTimeUpdate} onEnded={this.songEnd} src={this.props.songPlayCur.url? this.props.songPlayCur.url : ''} preload="auto" controls style={{width: '100%', height: '100%', display: 'block'}}></audio>
             </div>  
         )
     }
@@ -109,7 +126,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        songPlayCurUpdateDispatch : bindActionCreators(songPlayCurUpdateAction , dispatch)
+        songPlayCurUpdateDispatch : bindActionCreators(songPlayCurUpdateAction , dispatch),
+        songPlayTimeUpdateDispatch : bindActionCreators(songPlayTimeUpdateAction , dispatch),
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Player);
