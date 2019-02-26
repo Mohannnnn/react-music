@@ -1,1 +1,23 @@
-
+.home {
+    .logo{
+        position: relative;
+        animation: rotate-pic 9.5s infinite linear;
+    }
+    .playing {
+        -webkit-animation-play-state: running;
+        animation-play-state: running;
+    }
+    .paused {
+        animation: none;
+        -webkit-animation-play-state: paused;
+        animation-play-state: paused;
+    }
+    @keyframes rotate-pic{
+        0%{
+            transform: rotate(0);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+}

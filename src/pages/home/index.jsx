@@ -2,17 +2,18 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2019-01-11 14:58:26 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-01-20 20:58:37
+ * @Last Modified time: 2019-02-26 10:12:04
  */
 import React from 'react';
 import {
     Row , Col , Layout,Input,Avatar,Menu
 } from 'antd';
-import {HashRouter as Router, Switch, Route, Redirect , Link} from 'react-router-dom';
-import './index.scss';
+import { connect } from 'react-redux';
+import {HashRouter as Router, Switch, Route , Link} from 'react-router-dom';
 import HotList from '../hotList/index';
 import Recommend from '../recommend/index';
 import Searchs from '../search/index';
+import './index.scss';
 
 const {Header, Content, Footer, Sider} = Layout;
 const {Search} = Input;
@@ -43,15 +44,27 @@ class Home extends React.Component{
         return true;
     }
     render(){
+        let id,from;
+        this.props.songList.forEach((ele)=> {
+            if(ele.id == this.props.songPlayCur.id){
+                id = ele.id;
+                from = ele.type;
+            }
+        });
         return (
             <div className="home">
                 <Layout>
                     <Header style={{background:'#1890ff',padding:'0 10px', position: 'sticky', top: 0,left: 0 ,zIndex:10}}>
                         <Row align={'middle'} type={'flex'} justify={'space-between'}>
-                            <Col>
-                                <Avatar src={'../../assets/images/logo.svg'} size={'large'}></Avatar>
-                            </Col>
-                            <Col span={7} style={{color:'#fff',fontSize:'16px'}}>{this.state.title}</Col>
+                            {
+                                !!id || !!from ? 
+                                <Link to={{pathname : '/songdetail' , query : {id : id , from : from} , search : `?id=${id}&from=${from}`}}>
+                                    <Avatar src={'../../assets/images/logo.svg'} size={'large'} className={`${this.props.songPlayStatus? 'playing' : 'paused'} logo`}></Avatar>
+                                </Link>
+                                :
+                                <Avatar src={'../../assets/images/logo.svg'} size={'large'} className={`${this.props.songPlayStatus? 'playing' : 'paused'} logo`}></Avatar>
+                            }
+                            <Col span={7} style={{color:'#fff',fontSize:'16px',paddingLeft:'10px'}}>{this.state.title}</Col>
                             <Col span={14}>
                                 <Link to={`${this.props.match.url}/${this.state.routes.search}`}>
                                     <Search placeholder="搜索" disabled></Search>
@@ -83,4 +96,12 @@ class Home extends React.Component{
     }
 }
 
-export default Home;
+//注册store
+const mapStateToProps = (state) => {
+    return {
+        songList: state.songList,                   //播放歌曲列表({id,type})
+        songPlayCur : state.songPlayCur,            //当前播放
+        songPlayStatus: state.songPlayStatus,       //播放状态
+    };
+}
+export default connect(mapStateToProps)(Home);
