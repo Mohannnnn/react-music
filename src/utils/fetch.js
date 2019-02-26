@@ -2,10 +2,10 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2018-09-19 21:16:31 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-02-25 17:17:39
+ * @Last Modified time: 2019-02-26 22:57:38
  */
 // 封装fetch请求方法
-export default async({url = '' , type = 'GET' , data = {}} = {}) => {
+export default async({url = '' , type = 'GET' , data = {} , dataType='json'} = {}) => {
     type = type.toUpperCase();
     if(type == 'GET') {
         let uri = '';
@@ -35,8 +35,13 @@ export default async({url = '' , type = 'GET' , data = {}} = {}) => {
             })
         }
         const response = await fetch(url , options);
-        const responseJSON = await response.json();
-        return responseJSON;
+        if(dataType == 'json'){
+            const responseJSON = await response.json();
+            return responseJSON;
+        }else if(dataType == 'text'){
+            const responseText = await response.text();
+            return responseText;
+        }
     }else {
        return new Promise((resolve) => {
             const xhr = new XMLHttpRequest() || new ActiveXObject("Microsoft.XMLHTTP");
