@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { setLocalStorage , getLocalStorage , delLocalStorage } from '../../utils/tools.js';
 import { getKugouSearch , getNetEaseSearch , getQqSearch } from '../../api/getData.js';
 import Loading from '../../components/Loading';
+import QueueAnim from 'rc-queue-anim';
 import './index.scss';
 
 const SearchComponent = Input.Search;
@@ -34,6 +35,9 @@ class Search extends React.Component{
     }
     startSearch(value){
         if(value != '') {
+            if(this.state.searchNetEaseList.length!=0) this.setState({searchNetEaseList : []});
+            if(this.state.searchQqList.length!=0) this.setState({searchQqList : []});
+            if(this.state.searchKugouList.length!=0) this.setState({searchKugouList : []});
             // console.log('搜索关键字:', value)
             setLocalStorage(value , this.state.searchStorageName);
             const length = getLocalStorage(this.state.searchStorageName).length;
@@ -99,6 +103,7 @@ class Search extends React.Component{
     render(){
         const Common = ({ele , index , from}) => {
             return (
+                <Col key={index}>
                 <Link to={{pathname : '/songdetail' , query : {id : ele.id , from : from} , search : `?id=${ele.id}&from=${from}`}} key={index}>                                    
                     <Row type={'flex'}  align={'middle'} style={{padding:'5px 0 5px 10px'}}>
                         <Col xs={{span: 2 }} sm={{span: 1}} style={{fontSize:'18px',color:'#999'}}>{index+1}</Col>
@@ -113,13 +118,16 @@ class Search extends React.Component{
                         </Col>
                     </Row>
                 </Link>
+                </Col>
             )
         } 
         const NetEaseComponent = () => {
             return (
                 this.state.searchNetEaseList.map((ele , index ) => {
                     if(index < 30) {
-                        return <Common ele={ele} index={index} from='netease' key={index}></Common>
+                        return (
+                            <Common ele={ele} index={index} from='netease' key={index}></Common>
+                        )
                     }
                 })
             )
@@ -178,7 +186,9 @@ class Search extends React.Component{
                         this.state.searchNetEaseList.length == 0 ? '' : 
                         <section style={{width:'100%'}}>
                             <Col style={{fontSize:'17px',color:'#333'}}>网易云搜索结果</Col>
-                            <NetEaseComponent></NetEaseComponent>
+                            <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
+                                <NetEaseComponent></NetEaseComponent>
+                            </QueueAnim>
                         </section>
 
                     }
@@ -186,14 +196,18 @@ class Search extends React.Component{
                         this.state.searchQqList.length == 0 ? '' :
                         <section style={{width:'100%'}}>
                             <Col style={{fontSize:'17px',color:'#333'}}>QQ音乐搜索结果</Col>
-                            <QqComponent></QqComponent>
+                            <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
+                                <QqComponent></QqComponent>
+                            </QueueAnim>
                         </section>
                     }
                     {
                         this.state.searchKugouList.length == 0 ? '' :
                         <section style={{width:'100%'}}>
                             <Col style={{fontSize:'17px',color:'#333'}}>酷狗音乐搜索结果</Col>
+                            <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
                             <KugouComponent></KugouComponent>
+                            </QueueAnim>
                         </section>
                     }
                 </Row>

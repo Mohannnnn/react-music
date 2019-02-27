@@ -5,6 +5,8 @@ import {
 import { Link } from 'react-router-dom';
 import { getSongList } from '../../api/getData.js';
 import Loading from '../../components/Loading';
+import QueueAnim from 'rc-queue-anim';
+import Texty from 'rc-texty';
 import './index.scss';
 
 class AlbumDetail extends React.Component{
@@ -50,39 +52,43 @@ class AlbumDetail extends React.Component{
                         <span className="listen">{this.state.songMsg.songListPlayCount}</span>
                     </Col>
                     <Col span={14} style={{postion:'relative',zIndex:2}}>
-                        <p style={{color: '#fefefe',fontSize: '17px',lineHeight:'20px'}}>{this.state.songMsg.songListName}</p>
-                        <p style={{color: '#ccc',fontSize: '14px'}}>ID:{this.state.songMsg.songListUserId}</p>
+                        <Texty style={{color: '#fefefe',fontSize: '17px',lineHeight:'20px'}}>{this.state.songMsg.songListName}</Texty>
+                        <Texty style={{color: '#ccc',fontSize: '14px'}}>{this.state.songMsg.songListUserId? `ID:${this.state.songMsg.songListUserId}` : ''}</Texty>
                     </Col>
                 </Row>
                 <Row style={{padding: '20px 10px 10px 15px',color: '#666',fontSize: '14px'}}>
-                    简介：{this.state.songMsg.songListDescription}
+                    <Texty>{this.state.songMsg.songListDescription ? `简介：${this.state.songMsg.songListDescription.slice(0,50)}` : ''}</Texty>
                 </Row>
                 <Row style={{padding: '0px 10px 0px 15px',color: '#666',fontSize: '14px',lineHeight:'25px',background:'#eeeff0'}}>
                     歌单列表：
                 </Row>
                 <Row style={{zIndex:10,position:'relative'}}>
+                <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
                     {
                     !this.state.songMsg.songs? <Loading/> : this.state.songMsg.songs.map((ele , index ) => {
                         if(index < 30) {
                             return (
-                                <Link to={{pathname : '/songdetail' , query : {id : ele.id , from : 'netease' } , search : `?id=${ele.id}&from=netease`}} key={index}>                                    
-                                    <Row type={'flex'}  align={'middle'} style={{padding:'5px 0 5px 10px'}}>
-                                        <Col xs={{span: 2 }} sm={{span: 1}} style={{fontSize:'18px',color:'#999'}}>{index+1}</Col>
-                                        <Col xs={{span: 22 }} sm={{span: 23}} style={{borderBottom:'1px solid rgba(170, 170, 170, 0.3)', paddingRight:'10px'}}>                                        
-                                            <Row type={'flex'} justify={'space-between'} align={'middle'}>
-                                                <Row style={{width:'90%'}}>
-                                                    <Col style={{fontSize:'16px',color:'#333'}}>{ele.name}</Col>
-                                                    <Col style={{fontSize:'12px',color:'#888'}}>{ele.singer}</Col>
+                                <Col key={index}>                                
+                                    <Link to={{pathname : '/songdetail' , query : {id : ele.id , from : 'netease' } , search : `?id=${ele.id}&from=netease`}} key={index}>                                    
+                                        <Row type={'flex'}  align={'middle'} style={{padding:'5px 0 5px 10px'}}>
+                                            <Col xs={{span: 2 }} sm={{span: 1}} style={{fontSize:'18px',color:'#999'}}>{index+1}</Col>
+                                            <Col xs={{span: 22 }} sm={{span: 23}} style={{borderBottom:'1px solid rgba(170, 170, 170, 0.3)', paddingRight:'10px'}}>                                        
+                                                <Row type={'flex'} justify={'space-between'} align={'middle'}>
+                                                    <Row style={{width:'90%'}}>
+                                                        <Col style={{fontSize:'16px',color:'#333'}}>{ele.name}</Col>
+                                                        <Col style={{fontSize:'12px',color:'#888'}}>{ele.singer}</Col>
+                                                    </Row>
+                                                    <Icon type="play-circle" style={{ fontSize: '23px', color: '#aaaaaa'}}/>
                                                 </Row>
-                                                <Icon type="play-circle" style={{ fontSize: '23px', color: '#aaaaaa'}}/>
-                                            </Row>
-                                        </Col>
-                                    </Row>
-                                </Link>
+                                            </Col>
+                                        </Row>
+                                    </Link>
+                                </Col>
                             )
                         }
                     })
                     }
+                </QueueAnim>
                 </Row>
             </section>
         )

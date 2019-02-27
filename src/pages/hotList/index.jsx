@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { getSongList } from '../../api/getData.js';
 import Loading from '../../components/Loading';
+import QueueAnim from 'rc-queue-anim';
 import './index.scss';
 
 class HotList extends React.Component{
@@ -32,11 +33,12 @@ class HotList extends React.Component{
                         <div className="title-bg"></div>
                     </Col>
                 </Row>
-                <Row>
-                    {
-                        !this.state.songList.songs? <Loading/> : this.state.songList.songs.map((ele , index ) => {
-                            if(index < 20) {
-                                return (
+                <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
+                {
+                    !this.state.songList.songs? <Loading/> : this.state.songList.songs.map((ele , index ) => {
+                        if(index < 20) {
+                            return (
+                                <div key={index}>
                                     <Link to={{pathname : '/songdetail' , query : {id : ele.id ,from : 'netease' } , search : `?id=${ele.id}&from=netease`}} key={index}>                                    
                                         <Row type={'flex'}  align={'middle'} style={{padding:'5px 0 5px 10px'}}>
                                             <Col xs={{span: 2 }} sm={{span: 1}} style={{fontSize:'18px',color:'#999'}}>{index+1}</Col>
@@ -51,11 +53,12 @@ class HotList extends React.Component{
                                             </Col>
                                         </Row>
                                     </Link>
-                                )
-                            }
-                        })
-                    }
-                </Row>
+                                </div>
+                            )
+                        }
+                    })
+                }
+                </QueueAnim>
             </section>
         )
     }
