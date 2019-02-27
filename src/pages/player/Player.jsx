@@ -1,8 +1,8 @@
 import React from 'react';
-import { updateSongPlayCur as songPlayCurUpdateAction, updateSongPlayTime as songPlayTimeUpdateAction} from '../store/actions/index.js';
+import { updateSongPlayCur as songPlayCurUpdateAction, updateSongPlayTime as songPlayTimeUpdateAction} from '../../store/actions/index.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getNetEaseSongMsg , getQqSongMsg ,getKuGouSongMsg } from "../api/getData.js";
+import { getNetEaseSongMsg , getQqSongMsg ,getKuGouSongMsg } from "../../api/getData.js";
 
 class Player extends React.Component{
     constructor(props){
