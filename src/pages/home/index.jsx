@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2019-01-11 14:58:26 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-02-26 10:12:04
+ * @Last Modified time: 2019-02-28 21:36:23
  */
 import React from 'react';
 import {
@@ -64,7 +64,7 @@ class Home extends React.Component{
                                 :
                                 <Avatar src={'../../assets/images/logo.svg'} size={'large'} className={`${this.props.songPlayStatus? 'playing' : 'paused'} logo`}></Avatar>
                             }
-                            <Col span={7} style={{color:'#fff',fontSize:'16px',paddingLeft:'10px'}}>{this.state.title}</Col>
+                            <Col span={5} style={{color:'#fff',fontSize:'16px'}}>{this.state.title}</Col>
                             <Col span={14}>
                                 <Link to={`${this.props.match.url}/${this.state.routes.search}`}>
                                     <Search placeholder="搜索" disabled></Search>

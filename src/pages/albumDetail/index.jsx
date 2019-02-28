@@ -3,6 +3,11 @@ import {
     Row , Col ,Icon
 } from 'antd';
 import { Link } from 'react-router-dom';
+import { 
+    addSongList as songListAddAction,
+} from '../../store/actions/index.js';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { getSongList } from '../../api/getData.js';
 import Loading from '../../components/Loading';
 import QueueAnim from 'rc-queue-anim';
@@ -37,10 +42,16 @@ class AlbumDetail extends React.Component{
                     songMsg : res.data
                 })
             }
-            // else{
-            //     this.getSongs(albumId);
-            // }
         });
+    }
+    addToSongList(ele ,e) {
+        e.stopPropagation();
+        this.props.songListAddDispatch({
+            id : ele.id,
+            type : 'netease',
+            name : ele.name,
+            singer : ele.singer
+        })
     }
     render(){
         return(
@@ -57,7 +68,7 @@ class AlbumDetail extends React.Component{
                     </Col>
                 </Row>
                 <Row style={{padding: '20px 10px 10px 15px',color: '#666',fontSize: '14px'}}>
-                    <Texty>{this.state.songMsg.songListDescription ? `简介：${this.state.songMsg.songListDescription.slice(0,50)}` : ''}</Texty>
+                    <Texty>{this.state.songMsg.songListDescription ? `简介：${this.state.songMsg.songListDescription.slice(0,200)}` : ''}</Texty>
                 </Row>
                 <Row style={{padding: '0px 10px 0px 15px',color: '#666',fontSize: '14px',lineHeight:'25px',background:'#eeeff0'}}>
                     歌单列表：
@@ -67,23 +78,21 @@ class AlbumDetail extends React.Component{
                     {
                     !this.state.songMsg.songs? <Loading/> : this.state.songMsg.songs.map((ele , index ) => {
                         if(index < 30) {
-                            return (
-                                <Col key={index}>                                
-                                    <Link to={{pathname : '/songdetail' , query : {id : ele.id , from : 'netease' } , search : `?id=${ele.id}&from=netease`}} key={index}>                                    
-                                        <Row type={'flex'}  align={'middle'} style={{padding:'5px 0 5px 10px'}}>
-                                            <Col xs={{span: 2 }} sm={{span: 1}} style={{fontSize:'18px',color:'#999'}}>{index+1}</Col>
-                                            <Col xs={{span: 22 }} sm={{span: 23}} style={{borderBottom:'1px solid rgba(170, 170, 170, 0.3)', paddingRight:'10px'}}>                                        
-                                                <Row type={'flex'} justify={'space-between'} align={'middle'}>
-                                                    <Row style={{width:'90%'}}>
-                                                        <Col style={{fontSize:'16px',color:'#333'}}>{ele.name}</Col>
-                                                        <Col style={{fontSize:'12px',color:'#888'}}>{ele.singer}</Col>
-                                                    </Row>
-                                                    <Icon type="play-circle" style={{ fontSize: '23px', color: '#aaaaaa'}}/>
-                                                </Row>
-                                            </Col>
+                            return (                                                          
+                                <Row key={index} type={'flex'}  align={'middle'} style={{padding:'5px 0 5px 10px'}}>
+                                    <Col xs={{span: 2 }} sm={{span: 1}} style={{fontSize:'18px',color:'#999'}}>{index+1}</Col>
+                                    <Col xs={{span: 22 }} sm={{span: 23}} style={{borderBottom:'1px solid rgba(170, 170, 170, 0.3)', paddingRight:'10px'}}>                                        
+                                        <Row type={'flex'} justify={'space-between'} align={'middle'}>
+                                            <Row style={{width:'80%'}}>
+                                                <Link to={{pathname : '/songdetail' , query : {id : ele.id , from : 'netease' } , search : `?id=${ele.id}&from=netease`}} key={index}>                                    
+                                                    <Col style={{fontSize:'16px',color:'#333'}}>{ele.name}</Col>
+                                                    <Col style={{fontSize:'12px',color:'#888'}}>{ele.singer}</Col>
+                                                </Link>
+                                            </Row>
+                                            <Icon type="plus" onClick={this.addToSongList.bind(this,ele)} style={{ fontSize: '22px',padding: '10px', color: '#8a8a8a',cursor: 'pointer'}}/>
                                         </Row>
-                                    </Link>
-                                </Col>
+                                    </Col>
+                                </Row>                 
                             )
                         }
                     })
@@ -95,4 +104,19 @@ class AlbumDetail extends React.Component{
     }
 }
 
-export default AlbumDetail;
+//注册store
+const mapStateToProps = (state) => {
+    return {
+        songList: state.songList,                   //播放歌曲列表({id,type})
+        songPlayCur : state.songPlayCur,            //当前播放
+        songPlayStatus: state.songPlayStatus,       //播放状态
+        songPlayTime : state.songPlayTime,          //播放时间
+        songPlayVolume: state.songPlayVolume,       //播放音量
+    };
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        songListAddDispatch : bindActionCreators(songListAddAction , dispatch),
+    }
+}
+export default connect(null,mapDispatchToProps)(AlbumDetail);
