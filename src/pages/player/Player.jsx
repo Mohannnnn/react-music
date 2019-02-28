@@ -1,5 +1,9 @@
 import React from 'react';
-import { updateSongPlayCur as songPlayCurUpdateAction, updateSongPlayTime as songPlayTimeUpdateAction} from '../../store/actions/index.js';
+import { 
+    updateSongPlayCur as songPlayCurUpdateAction, 
+    updateSongPlayTime as songPlayTimeUpdateAction,
+    updateSongPlayStatus as songPlayStatusUpdateAction,
+} from '../../store/actions/index.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getNetEaseSongMsg , getQqSongMsg ,getKuGouSongMsg } from "../../api/getData.js";
@@ -29,6 +33,7 @@ class Player extends React.Component{
         if(this.props.songPlayCur != prevProps.songPlayCur){
             //console.log(this.props.songPlayCur , prevProps.songPlayCur);
             this.props.songPlayTimeUpdateDispatch(0);
+            this.props.songPlayStatusUpdateDispatch(true);
         }
     }
     //播放
@@ -128,6 +133,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         songPlayCurUpdateDispatch : bindActionCreators(songPlayCurUpdateAction , dispatch),
         songPlayTimeUpdateDispatch : bindActionCreators(songPlayTimeUpdateAction , dispatch),
+        songPlayStatusUpdateDispatch : bindActionCreators(songPlayStatusUpdateAction , dispatch),
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Player);
