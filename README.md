@@ -46,6 +46,18 @@ React Music WebApp，在听音乐的时候忽然想听腾格尔的钢铁之翼�
     │-router            #路由
     └─assets			#静态目录，存放静态资源
 ```
+### 实现的功能
+[x] 1.推荐歌单页
+[x] 2.推荐歌单详情页
+[x] 3.热门歌曲页
+[x] 4.搜索（QQ音乐、网易云、酷狗）
+[x] 5.音乐全局播放
+[x] 6.歌词同步
+[x] 7.切换上一首、下一首
+[x] 8.添加到歌单、从歌单删除、删除全部
+[x] 9.歌词动画、以及每个路由下的页面出场动画
+[]  10.音量控制
+
 ### 安装依赖
 ```bash
 yarn install / npm install
@@ -62,4 +74,4 @@ yarn build/npm run build
 - 1.网易云: [https://www.bzqll.com/2018/10/39.html](https://www.bzqll.com/2018/10/39.html)
 - 2.QQ: [https://www.bzqll.com/2019/01/262.html](https://www.bzqll.com/2019/01/262.html)
 - 3.酷狗: [https://www.bzqll.com/2019/01/259.html](https://www.bzqll.com/2019/01/259.html)
-非常感谢该博主，打Call！！！
+- 非常感谢该博主，打Call！！！
