@@ -22,6 +22,7 @@ class AlbumDetail extends React.Component{
             songMsg : {},
         }
         this.getSongs = this.getSongs.bind(this);
+        this.addAllToSongList = this.addAllToSongList.bind(this);
     }
     //调用setState不会触发
     static getDerivedStateFromProps(nextProps , preState){
@@ -44,14 +45,27 @@ class AlbumDetail extends React.Component{
             }
         });
     }
+    //添加单个
     addToSongList(ele ,e) {
         e.stopPropagation();
-        this.props.songListAddDispatch({
+        this.props.songListAddDispatch([{
             id : ele.id,
             type : 'netease',
             name : ele.name,
             singer : ele.singer
-        })
+        }])
+    }
+    //添加全部
+    addAllToSongList(){
+       let newArr = this.state.songMsg.songs.map(ele => {
+            return {
+                id : ele.id,
+                type : 'netease',
+                name : ele.name,
+                singer : ele.singer
+            }
+       })
+       this.props.songListAddDispatch(newArr);
     }
     render(){
         return(
@@ -68,10 +82,11 @@ class AlbumDetail extends React.Component{
                     </Col>
                 </Row>
                 <Row style={{padding: '20px 10px 10px 15px',color: '#666',fontSize: '14px'}}>
-                    <Texty>{this.state.songMsg.songListDescription ? `简介：${this.state.songMsg.songListDescription.slice(0,200)}` : ''}</Texty>
+                    <Texty>{this.state.songMsg.songListDescription ? `简介：${this.state.songMsg.songListDescription.length > 200 ? this.state.songMsg.songListDescription.slice(0,200) + '...' : this.state.songMsg.songListDescription }` : ''}</Texty>
                 </Row>
-                <Row style={{padding: '0px 10px 0px 15px',color: '#666',fontSize: '14px',lineHeight:'25px',background:'#eeeff0'}}>
-                    歌单列表：
+                <Row type={'flex'}  justify={'space-between'} style={{padding: '0px 10px 0px 10px',color: '#666',fontSize: '18px',lineHeight:'40px',background:'#eeeff0'}}>
+                    <Col>歌单列表：</Col>
+                    <Icon type="menu-unfold" onClick={this.addAllToSongList} style={{ fontSize: '20px',padding: '10px', color: '#8a8a8a',cursor: 'pointer'}}/>
                 </Row>
                 <Row style={{zIndex:10,position:'relative'}}>
                 <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>

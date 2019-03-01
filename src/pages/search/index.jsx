@@ -108,12 +108,12 @@ class Search extends React.Component{
     addToSongList(ele ,from,e) {
         e.stopPropagation();
         // console.log(ele,e.target)
-        this.props.songListAddDispatch({
+        this.props.songListAddDispatch([{
             id : ele.id,
             type : from ,
             name : ele.name,
             singer : ele.singer
-        })
+        }])
     }
     render(){
         const Common = ({ele , index , from}) => {

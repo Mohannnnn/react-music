@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn]
  * @Date: 2018-12-27 17:02:13
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-02-24 17:15:52
+ * @Last Modified time: 2019-03-01 16:36:13
  * des: redux数据计算中心
  */
 import { combineReducers } from 'redux';
@@ -32,7 +32,7 @@ const albumList = (state = states.albumList , action) =>{
 const songList = (state = states.songList , action) => {
     switch (action.type) {
         case actionsTypes.SONGLIST_ADD :
-            let arr = [...state , action.data];
+            let arr = [...state , ...action.data];
             let obj = {};
             return arr.reduce((cur , next) => {
                 obj[next.id] ? '' : obj[next.id] = true && cur.push(next);

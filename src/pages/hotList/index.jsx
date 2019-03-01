@@ -33,12 +33,12 @@ class HotList extends React.Component{
     addToSongList(ele ,e) {
         e.stopPropagation();
         // console.log(ele,e.target)
-        this.props.songListAddDispatch({
+        this.props.songListAddDispatch([{
             id : ele.id,
             type : 'netease',
             name : ele.name,
             singer : ele.singer
-        })
+        }])
     }
     render(){
         return(

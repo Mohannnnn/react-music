@@ -59,7 +59,7 @@ class songDetail extends React.Component{
         }
         if(this.props.songPlayTime != prevProps.songPlayTime){
             this.state.lrcArr.forEach((ele,index) => {
-                if(this.state.lrcArr[index+1] && this.props.songPlayTime >= ele.time && this.props.songPlayTime < this.state.lrcArr[index+1].time){
+                if(this.props.songPlayTime >= ele.time && ((this.state.lrcArr[index+1] && this.props.songPlayTime < this.state.lrcArr[index+1].time) || index == this.state.lrcArr.length-1)){
                     this.setState({
                         activeIndex : index
                     })
@@ -84,12 +84,12 @@ class songDetail extends React.Component{
                     //console.log(res)
                     if(res.code == 200){
                         this.props.songPlayCurUpdateDispatch(res.data);
-                        this.props.songListAddDispatch({
+                        this.props.songListAddDispatch([{
                             id : songId , 
                             type : type,
                             name : res.data.name,
                             singer : res.data.singer
-                        });
+                        }]);
                     }
                 })
                 break;
@@ -98,12 +98,12 @@ class songDetail extends React.Component{
                     //console.log(res)
                     if(res.code == 200){
                         this.props.songPlayCurUpdateDispatch(res.data);
-                        this.props.songListAddDispatch({
+                        this.props.songListAddDispatch([{
                             id : songId , 
                             type : type,
                             name : res.data.name,
                             singer : res.data.singer
-                        });
+                        }]);
                     }
                 })
                 break;
@@ -112,12 +112,12 @@ class songDetail extends React.Component{
                     //console.log(res)
                     if(res.code == 200){
                         this.props.songPlayCurUpdateDispatch(res.data);
-                        this.props.songListAddDispatch({
+                        this.props.songListAddDispatch([{
                             id : songId , 
                             type : type,
                             name : res.data.name,
                             singer : res.data.singer
-                        });
+                        }]);
                     }
                 })
                 break;
@@ -197,6 +197,21 @@ class songDetail extends React.Component{
         })
     }
     render(){
+        const SongListComponent = () => {
+            return this.props.songList.map((ele , index) => {
+                return (
+                    <Row key={ele.id} type={'flex'} justify={'space-between'} align={'middle'} style={{borderBottom:'1px solid #b7b6b6'}}>
+                        <Col style={{flex:'auto',marginRight:'20px'}}>
+                            <Link to={{pathname : '/songdetail' , query : {id : ele.id , from : ele.type} , search : `?id=${ele.id}&from=${ele.type}`}}> 
+                                <span style={{fontSize:'18px',color:'#666'}}>{ele.name}</span>
+                                <span style={{fontSize:'14px',color:'#888',}}> - {ele.singer}</span>
+                            </Link>
+                        </Col>
+                        <Icon type="close" onClick={this.deleteToSongList.bind(this,ele)} style={{ fontSize: '18px',padding: '10px', color: '#8a8a8a',cursor: 'pointer'}}/>
+                    </Row>
+                )
+            })
+        };        
         return(
             <section className="song-detail">
                 <div className="song-bg" style={{backgroundImage:`url(${this.props.songPlayCur.pic})`}}></div>
@@ -242,7 +257,7 @@ class songDetail extends React.Component{
                             <Icon onClick={this.preSongPlay} type="step-backward" style={{fontSize:'50px',color:'#f3f3f3'}} />
                             <Icon onClick={this.changeSongPlayStatus} type={ !this.props.songPlayStatus ? "play-circle" : "pause-circle"} style={{fontSize:'47px',color:'#f3f3f3'}}/>
                             <Icon onClick={this.nextSongPlay} type="step-forward" style={{fontSize:'50px',color:'#f3f3f3'}} />
-                            <Icon type="menu-unfold" style={{fontSize:'30px',color:'#f3f3f3'}} onClick={this.changePlayList}/>
+                            <Icon type="bars" style={{fontSize:'30px',color:'#f3f3f3'}} onClick={this.changePlayList}/>
                         </Row>
                     </Row>
                     {
@@ -250,25 +265,11 @@ class songDetail extends React.Component{
                         <Row style={{position:'absolute',left:0,bottom:0,width:'100%',height:'100%',transition:'all .5s'}}>
                             <Col style={{background:'#000',opacity:.6,width:'100%',height:'100%'}}></Col>
                             <QueueAnim type={'right'} interval='50' ease={'easeOutQuart'}  className=""  style={{transition:'all .5s',position:'absolute',left:0,bottom:0,maxHeight:'70%',minHeight:'60%',width: '100%',overflowY:'scroll',background: '#eee',padding: '0 15px',borderTopLeftRadius: '10px',borderTopRightRadius: '10px'}}>
-                                <Row type={'flex'} justify={'space-between'} align={'middle'} style={{borderBottom:'1px solid #b7b6b6'}}>
+                                <Row key={'close'} type={'flex'} justify={'space-between'} align={'middle'} style={{borderBottom:'1px solid #b7b6b6'}}>
                                     <Col style={{flex:'auto',textAlign:'center',fontSize:'18px',color:'#666',padding: '10px 0',cursor: 'pointer'}} onClick={this.changePlayList}>关闭</Col>
                                     <Icon type="delete" onClick={this.deleteAllSongList} style={{ fontSize: '20px',padding: '10px', color: '#8a8a8a',cursor: 'pointer'}}/>
                                 </Row>
-                                {
-                                    this.props.songList.map((ele , index) => {
-                                        return (
-                                            <Row key={ele.id} type={'flex'} justify={'space-between'} align={'middle'} style={{borderBottom:'1px solid #b7b6b6'}}>
-                                                <Col style={{flex:'auto',marginRight:'20px'}}>
-                                                    <Link to={{pathname : '/songdetail' , query : {id : ele.id , from : ele.type} , search : `?id=${ele.id}&from=${ele.type}`}}> 
-                                                        <span style={{fontSize:'18px',color:'#666'}}>{ele.name}</span>
-                                                        <span style={{fontSize:'14px',color:'#888',}}> - {ele.singer}</span>
-                                                    </Link>
-                                                </Col>
-                                                <Icon type="close" onClick={this.deleteToSongList.bind(this,ele)} style={{ fontSize: '18px',padding: '10px', color: '#8a8a8a',cursor: 'pointer'}}/>
-                                            </Row>
-                                        )
-                                    })
-                                }
+                                <SongListComponent></SongListComponent>
                             </QueueAnim>
                         </Row>
                     }
