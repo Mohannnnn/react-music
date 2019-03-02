@@ -70,3 +70,11 @@ export const updateSongPlayVolume = (data) => {
         data
     }
 }
+
+//更新播放模式
+export const updateSongPlayMode = (data) => {
+    return {
+        type : actionsTypes.SONGPLAYMODE_UPDATE,
+        data
+    }
+}

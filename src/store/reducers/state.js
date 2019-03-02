@@ -13,5 +13,6 @@ const state = {
   songPlayStatus: false,    //播放状态
   songPlayTime : 0,         //播放时间
   songPlayVolume: 0.5,      //播放音量
+  songPlayMode: 0,          //播放模式(0.顺序播放，1.随机播放，其他在这后面加)
 }
 export default state;

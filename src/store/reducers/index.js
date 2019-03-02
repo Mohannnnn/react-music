@@ -89,6 +89,15 @@ const songPlayVolume = (state = states.songPlayVolume , action) => {
     }
 }
 
+//播放模式
+const songPlayMode = (state = states.songPlayMode , action) => {
+    switch (action.type) {
+        case actionsTypes.SONGPLAYMODE_UPDATE : 
+            return action.data;
+        default :
+            return state;
+    }
+}
 export default combineReducers({
     userInfo,
     albumList,
@@ -96,5 +105,6 @@ export default combineReducers({
     songPlayCur,
     songPlayStatus,
     songPlayTime,
-    songPlayVolume
+    songPlayVolume,
+    songPlayMode
 })
