@@ -12,7 +12,6 @@
     netEaseSearch : 'https://api.bzqll.com/music/netease/search',   //网易云搜索
     qqSearch : 'https://api.bzqll.com/music/tencent/search',        //QQ音乐搜索
     kugouSearch : 'https://api.bzqll.com/music/kugou/search',       //酷狗搜索
-    // kugouSearch : 'http://mobilecdn.kugou.com/api/v3/search/song',  //酷狗搜索
     netEaseSongMsg : 'https://api.bzqll.com/music/netease/song',    //网易云歌曲信息
     qqSongMsg : 'https://api.bzqll.com/music/tencent/song',         //QQ歌曲信息
     kuGouSongMsg : 'https://api.bzqll.com/music/kugou/song',        //酷狗歌曲信息
