@@ -48,24 +48,14 @@ class AlbumDetail extends React.Component{
     //添加单个
     addToSongList(ele ,e) {
         e.stopPropagation();
-        this.props.songListAddDispatch([{
-            id : ele.id,
-            type : 'netease',
-            name : ele.name,
-            singer : ele.singer
-        }])
+        this.props.songListAddDispatch([Object.assign(ele , {type : 'netease'})]);
     }
     //添加全部
     addAllToSongList(){
        let newArr = this.state.songMsg.songs.map(ele => {
-            return {
-                id : ele.id,
-                type : 'netease',
-                name : ele.name,
-                singer : ele.singer
-            }
-       })
-       this.props.songListAddDispatch(newArr);
+            return Object.assign(ele , { type : 'netease' });
+        })
+        this.props.songListAddDispatch(newArr);
     }
     render(){
         return(
