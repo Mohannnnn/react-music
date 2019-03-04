@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Row , Col , Icon, Slider
+    Row , Col , Icon, Slider , Avatar
 } from 'antd';
 import { Link } from 'react-router-dom';
 import { 
@@ -11,6 +11,7 @@ import {
     updateSongPlayStatus as songPlayStatusUpdateAction,
     updateSongPlayTime as songPlayTimeUpdateAction,
     updateSongPlayVolume as songPlayVolumeUpdateAction,
+    updateSongPlayMode as songPlayModeUpdateAction,
 } from '../../store/actions/index.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -45,6 +46,7 @@ class songDetail extends React.Component{
         this.changeLrcs = this.changeLrcs.bind(this);
         this.deleteAllSongList = this.deleteAllSongList.bind(this);
         this.changePlayList = this.changePlayList.bind(this); 
+        this.changePlayMode = this.changePlayMode.bind(this);    
     }
     componentDidUpdate(prevProps){
         if(this.props.songPlayCur != prevProps.songPlayCur){
@@ -59,7 +61,7 @@ class songDetail extends React.Component{
         }
         if(this.props.songPlayTime != prevProps.songPlayTime){
             this.state.lrcArr.forEach((ele,index) => {
-                if(this.props.songPlayTime >= ele.time && ((this.state.lrcArr[index+1] && this.props.songPlayTime < this.state.lrcArr[index+1].time) || index == this.state.lrcArr.length-1)){
+                if(this.props.songPlayTime >= ele.time-0.5 && ((this.state.lrcArr[index+1] && this.props.songPlayTime < this.state.lrcArr[index+1].time) || index == this.state.lrcArr.length-1)){
                     this.setState({
                         activeIndex : index
                     })
@@ -84,12 +86,7 @@ class songDetail extends React.Component{
                     //console.log(res)
                     if(res.code == 200){
                         this.props.songPlayCurUpdateDispatch(res.data);
-                        this.props.songListAddDispatch([{
-                            id : songId , 
-                            type : type,
-                            name : res.data.name,
-                            singer : res.data.singer
-                        }]);
+                        this.props.songListAddDispatch([Object.assign(res.data , {type : type})]);
                     }
                 })
                 break;
@@ -98,12 +95,7 @@ class songDetail extends React.Component{
                     //console.log(res)
                     if(res.code == 200){
                         this.props.songPlayCurUpdateDispatch(res.data);
-                        this.props.songListAddDispatch([{
-                            id : songId , 
-                            type : type,
-                            name : res.data.name,
-                            singer : res.data.singer
-                        }]);
+                        this.props.songListAddDispatch([Object.assign(res.data , {type : type})]);
                     }
                 })
                 break;
@@ -112,12 +104,7 @@ class songDetail extends React.Component{
                     //console.log(res)
                     if(res.code == 200){
                         this.props.songPlayCurUpdateDispatch(res.data);
-                        this.props.songListAddDispatch([{
-                            id : songId , 
-                            type : type,
-                            name : res.data.name,
-                            singer : res.data.singer
-                        }]);
+                        this.props.songListAddDispatch([Object.assign(res.data , {type : type})]);
                     }
                 })
                 break;
@@ -190,28 +177,23 @@ class songDetail extends React.Component{
     deleteAllSongList(){
         this.props.songListDeleteAllDispatch();
     }
+    //播放
+    changePlayCur(ele,e) {
+        e.stopPropagation();
+        this.props.songPlayCurUpdateDispatch(ele);
+    }
     //切换播放列表状态
     changePlayList(){
         this.setState({
             showPlayList : !this.state.showPlayList
         })
     }
-    render(){
-        const SongListComponent = () => {
-            return this.props.songList.map((ele , index) => {
-                return (
-                    <Row key={ele.id} type={'flex'} justify={'space-between'} align={'middle'} style={{borderBottom:'1px solid #b7b6b6'}}>
-                        <Col style={{flex:'auto',marginRight:'20px'}}>
-                            <Link to={{pathname : '/songdetail' , query : {id : ele.id , from : ele.type} , search : `?id=${ele.id}&from=${ele.type}`}}> 
-                                <span style={{fontSize:'18px',color:'#666'}}>{ele.name}</span>
-                                <span style={{fontSize:'14px',color:'#888',}}> - {ele.singer}</span>
-                            </Link>
-                        </Col>
-                        <Icon type="close" onClick={this.deleteToSongList.bind(this,ele)} style={{ fontSize: '18px',padding: '10px', color: '#8a8a8a',cursor: 'pointer'}}/>
-                    </Row>
-                )
-            })
-        };        
+    //播放模式
+    changePlayMode(){
+        //console.log(this.props.songPlayMode);
+        this.props.songPlayModeUpdateDispatch((this.props.songPlayMode+1)%2);
+    }
+    render(){      
         return(
             <section className="song-detail">
                 <div className="song-bg" style={{backgroundImage:`url(${this.props.songPlayCur.pic})`}}></div>
@@ -253,7 +235,12 @@ class songDetail extends React.Component{
                             <span>{this.props.songPlayCur.time ? formatTime(this.props.songPlayCur.time) : '00:00'}</span>
                         </Row>
                         <Row type={'flex'} align='middle' justify={'space-between'}>
-                            <Icon type="sound" style={{fontSize:'30px',color:'#f3f3f3'}}/>
+                            {
+                                this.props.songPlayMode == 0 ?
+                                 <Icon className="play-mode" type="retweet" style={{fontSize:'30px',color:'#f3f3f3'}} onClick={this.changePlayMode}/>
+                                :
+                                 <Avatar className="play-mode" src={'../../assets/images/sj.svg'} style={{fontSize:'30px',color:'#f3f3f3'}} size={30} onClick={this.changePlayMode}></Avatar>         
+                            }
                             <Icon onClick={this.preSongPlay} type="step-backward" style={{fontSize:'50px',color:'#f3f3f3'}} />
                             <Icon onClick={this.changeSongPlayStatus} type={ !this.props.songPlayStatus ? "play-circle" : "pause-circle"} style={{fontSize:'47px',color:'#f3f3f3'}}/>
                             <Icon onClick={this.nextSongPlay} type="step-forward" style={{fontSize:'50px',color:'#f3f3f3'}} />
@@ -264,13 +251,25 @@ class songDetail extends React.Component{
                         !this.state.showPlayList ? '' : 
                         <Row style={{position:'absolute',left:0,bottom:0,width:'100%',height:'100%',transition:'all .5s'}}>
                             <Col style={{background:'#000',opacity:.6,width:'100%',height:'100%'}}></Col>
-                            <QueueAnim type={'right'} interval='50' ease={'easeOutQuart'}  className=""  style={{transition:'all .5s',position:'absolute',left:0,bottom:0,maxHeight:'70%',minHeight:'60%',width: '100%',overflowY:'scroll',background: '#eee',padding: '0 15px',borderTopLeftRadius: '10px',borderTopRightRadius: '10px'}}>
-                                <Row key={'close'} type={'flex'} justify={'space-between'} align={'middle'} style={{borderBottom:'1px solid #b7b6b6'}}>
-                                    <Col style={{flex:'auto',textAlign:'center',fontSize:'18px',color:'#666',padding: '10px 0',cursor: 'pointer'}} onClick={this.changePlayList}>关闭</Col>
-                                    <Icon type="delete" onClick={this.deleteAllSongList} style={{ fontSize: '20px',padding: '10px', color: '#8a8a8a',cursor: 'pointer'}}/>
-                                </Row>
-                                <SongListComponent></SongListComponent>
+                            <QueueAnim type={'right'} interval='50' ease={'easeOutQuart'}  className=""  style={{transition:'all .5s',position:'absolute',left:0,bottom:0,paddingBottom:'47px',height:'70%',width: '100%',overflowX: 'hidden',background: '#eee',borderRadius: '5px'}}>
+                                {
+                                    this.props.songList.map((ele , index) => {
+                                        return (
+                                            <Row key={ele.id} type={'flex'} className='song-list' justify={'space-between'} align={'middle'} style={{borderBottom:'1px solid #dadada',padding: '5px 15px'}}>
+                                                <Col onClick={this.changePlayCur.bind(this,ele)} style={{flex:'auto',marginRight:'20px',width: '75%',cursor: 'pointer'}}>
+                                                    <span style={{fontSize:'18px',color:'#666'}}>{ele.name}</span>
+                                                    <span style={{fontSize:'14px',color:'#888',}}> - {ele.singer}</span>
+                                                </Col>
+                                                <Icon type="close" onClick={this.deleteToSongList.bind(this,ele)} style={{ fontSize: '18px',padding: '10px', color: '#8a8a8a',cursor: 'pointer'}}/>
+                                            </Row>
+                                        )
+                                    })
+                                }
                             </QueueAnim>
+                            <Row key={'close'} type={'flex'} justify={'space-between'} align={'middle'} style={{borderTop:'1px solid #dadada',position:'absolute',background: '#eeeeee',left:0,bottom:0,width:'100%',padding:'0 15px'}}>
+                                <Col style={{flex:'auto',textAlign:'center',fontSize:'18px',color:'#1890ff',padding: '10px 0',cursor: 'pointer'}} onClick={this.changePlayList}>关闭</Col>
+                                <Icon type="delete" onClick={this.deleteAllSongList} style={{ fontSize: '20px',padding: '10px', color: '#8a8a8a',cursor: 'pointer'}}/>
+                            </Row>
                         </Row>
                     }
                 </div>
@@ -287,6 +286,7 @@ const mapStateToProps = (state) => {
         songPlayStatus: state.songPlayStatus,       //播放状态
         songPlayTime : state.songPlayTime,          //播放时间
         songPlayVolume: state.songPlayVolume,       //播放音量
+        songPlayMode: state.songPlayMode,           //播放模式
     };
 }
 const mapDispatchToProps = (dispatch) => {
@@ -297,7 +297,8 @@ const mapDispatchToProps = (dispatch) => {
         songPlayCurUpdateDispatch : bindActionCreators(songPlayCurUpdateAction , dispatch),
         songPlayStatusUpdateDispatch : bindActionCreators(songPlayStatusUpdateAction , dispatch),
         songPlayTimeUpdateDispatch : bindActionCreators(songPlayTimeUpdateAction , dispatch),
-        songPlayVolumeUpdateDispatch : bindActionCreators(songPlayVolumeUpdateAction , dispatch)
+        songPlayVolumeUpdateDispatch : bindActionCreators(songPlayVolumeUpdateAction , dispatch),
+        songPlayModeUpdateDispatch : bindActionCreators(songPlayModeUpdateAction , dispatch),
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(songDetail);

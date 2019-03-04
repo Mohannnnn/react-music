@@ -49,7 +49,9 @@
         max-height: 62%;
         margin: 10px 20px;
         overflow: hidden;
+        cursor: pointer;
         .banner-elem{
+            cursor: pointer;
             text-align: center;
             color: #f3f3f3;
             position: relative;
@@ -64,6 +66,9 @@
         .banner-content{
             font-size: 18px;
         }
+    }
+    .song-list:hover{
+        background:#dadada;
     }
 }
 @keyframes rotate-pic{

@@ -39,7 +39,7 @@ class Search extends React.Component{
         return null;
     }
     startSearch(value){
-        if(value != '') {
+        if(value.trim() != '') {
             if(this.state.searchNetEaseList.length!=0) this.setState({searchNetEaseList : []});
             if(this.state.searchQqList.length!=0) this.setState({searchQqList : []});
             if(this.state.searchKugouList.length!=0) this.setState({searchKugouList : []});
@@ -81,25 +81,6 @@ class Search extends React.Component{
                     })
                 }
             })
-            // getKugouSearch({
-            //     type : 'get',
-            //     dataType : 'jsonp',
-            //     data : {
-            //         format : 'json' ,
-            //         keyword : value,
-            //         page : 1 ,
-            //         pagesize : 10 ,
-            //         showtype : 1
-            //     },
-            //     success: (res) => {
-            //         if(res.data.info.length > 0){
-            //             this.setState({
-            //                 searchKugouList : res.data.info
-            //             })
-            //             console.log(res.data.info)
-            //         }
-            //     }
-            // })
         }
     }
     handleChange(e) {
@@ -107,13 +88,7 @@ class Search extends React.Component{
     }
     addToSongList(ele ,from,e) {
         e.stopPropagation();
-        // console.log(ele,e.target)
-        this.props.songListAddDispatch([{
-            id : ele.id,
-            type : from ,
-            name : ele.name,
-            singer : ele.singer
-        }])
+        this.props.songListAddDispatch([Object.assign(ele , {type : from})]);
     }
     render(){
         const Common = ({ele , index , from}) => {
@@ -198,7 +173,7 @@ class Search extends React.Component{
                     {
                         this.state.searchNetEaseList.length == 0 ? '' : 
                         <section style={{width:'100%'}}>
-                            <Col style={{fontSize:'17px',color:'#333'}}>网易云搜索结果</Col>
+                            <Col style={{fontSize:'19px',color:'#1890ff',paddingLeft: '10px'}}>网易云搜索结果</Col>
                             <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
                                 <NetEaseComponent></NetEaseComponent>
                             </QueueAnim>
@@ -208,7 +183,7 @@ class Search extends React.Component{
                     {
                         this.state.searchQqList.length == 0 ? '' :
                         <section style={{width:'100%'}}>
-                            <Col style={{fontSize:'17px',color:'#333'}}>QQ音乐搜索结果</Col>
+                            <Col style={{fontSize:'19px',color:'#1890ff',paddingLeft: '10px'}}>QQ音乐搜索结果</Col>
                             <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
                                 <QqComponent></QqComponent>
                             </QueueAnim>
@@ -217,7 +192,7 @@ class Search extends React.Component{
                     {
                         this.state.searchKugouList.length == 0 ? '' :
                         <section style={{width:'100%'}}>
-                            <Col style={{fontSize:'17px',color:'#333'}}>酷狗音乐搜索结果</Col>
+                            <Col style={{fontSize:'19px',color:'#1890ff',paddingLeft: '10px'}}>酷狗音乐搜索结果</Col>
                             <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
                             <KugouComponent></KugouComponent>
                             </QueueAnim>
