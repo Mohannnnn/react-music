@@ -31,7 +31,6 @@ class Player extends React.Component{
             this.songToPause();
         }
         if(this.props.songPlayCur != prevProps.songPlayCur){
-            //console.log(this.props.songPlayCur , prevProps.songPlayCur);
             this.props.songPlayTimeUpdateDispatch(0);
             this.props.songPlayStatusUpdateDispatch(true);
         }
@@ -73,10 +72,18 @@ class Player extends React.Component{
     songEnd(){
         const songListLen = this.props.songList.length;
         if(songListLen>1){
+            let roundNum = 1;
+            //随机播放
+            if(this.props.songPlayMode == 1) {
+                roundNum = Math.floor(Math.random()*songListLen);
+                while(roundNum == 0){
+                    roundNum = Math.floor(Math.random()*songListLen);
+                }
+            }
             this.props.songList.forEach((ele , index)=> {
                 if(ele.id == this.props.songPlayCur.id){
-                    const id = this.props.songList[(index+1)%songListLen].id;
-                    const type = this.props.songList[(index+1)%songListLen].type;
+                    const id = this.props.songList[(index+roundNum)%songListLen].id;
+                    const type = this.props.songList[(index+roundNum)%songListLen].type;
                     this.getSongMsg(id , type);
                     return;
                 }
@@ -114,7 +121,7 @@ class Player extends React.Component{
     render(){
         return(
             <div style={{width: '100%',height: '50px',display:'none'}}>
-                <audio className="audio-music" ref="audioMusic" onProgress={this.songProgress} onTimeUpdate={this.songTimeUpdate} onEnded={this.songEnd} src={this.props.songPlayCur.url? this.props.songPlayCur.url : ''} preload="auto" controls style={{width: '100%', height: '100%', display: 'block'}}></audio>
+                <audio className="audio-music" ref="audioMusic" onProgress={this.songProgress} onTimeUpdate={this.songTimeUpdate} onEnded={this.songEnd} src={this.props.songPlayCur.url? this.props.songPlayCur.url : ''} preload="auto" autoPlay controls style={{width: '100%', height: '100%', display: 'block'}}></audio>
             </div>  
         )
     }
@@ -127,6 +134,7 @@ const mapStateToProps = (state) => {
         songPlayStatus: state.songPlayStatus,       //播放状态
         songPlayTime : state.songPlayTime,          //播放时间
         songPlayVolume: state.songPlayVolume,       //播放音量
+        songPlayMode: state.songPlayMode,           //播放模式
     };
 }
 const mapDispatchToProps = (dispatch) => {
