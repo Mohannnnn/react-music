@@ -1,12 +1,10 @@
 # React-music
 React Music WebApp，在听音乐的时候忽然想听腾格尔的钢铁之翼（隐形的翅膀），在网易云上却找不到，就很气。于是想到了做一个，音乐搜索的功能，把所有想听的歌，能够一次性在酷狗、网易云、QQ、虾米等平台上找找完。
 
-### 地址
+### 地址(欢迎start哦~)
 
 > 在线地址:[http://music.wuhann.cn/#/home](http://music.wuhann.cn/#/home)
-
 > 后端github地址:[https://github.com/Mohannnnn/react-music-koa2](https://github.com/Mohannnnn/react-music-koa2)
-
 > 前端github地址:[https://github.com/Mohannnnn/react-music](https://github.com/Mohannnnn/react-music)
 
 ### 技术栈
@@ -80,3 +78,12 @@ yarn build/npm run build
 * 2.QQ: [https://www.bzqll.com/2019/01/262.html](https://www.bzqll.com/2019/01/262.html)
 * 3.酷狗: [https://www.bzqll.com/2019/01/259.html](https://www.bzqll.com/2019/01/259.html)
 * 非常感谢该博主，打Call！！！
+
+### Demo
+![推荐歌单]('./demo/1.png')
+![热门歌曲]('./demo/2.png')
+![搜索]('./demo/3.png')
+![歌单详情]('./demo/4.png')
+![播放页]('./demo/5.png')
+![gif预览播放]('./demo/6.gif')
+
