@@ -80,6 +80,10 @@ yarn build/npm run build
 * 非常感谢该博主，打Call！！！
 
 ### Demo
-![推荐歌单](https://github.com/Mohannnnn/react-music/blob/master/demo/1.png)![热门歌曲](https://github.com/Mohannnnn/react-music/blob/master/demo/2.png)![搜索](https://github.com/Mohannnnn/react-music/blob/master/demo/3.png)![歌单详情](https://github.com/Mohannnnn/react-music/blob/master/demo/4.png)![播放页](https://github.com/Mohannnnn/react-music/blob/master/demo/5.png)
+![推荐歌单](https://github.com/Mohannnnn/react-music/blob/master/demo/1.png)
+![热门歌曲](https://github.com/Mohannnnn/react-music/blob/master/demo/2.png)
+![搜索](https://github.com/Mohannnnn/react-music/blob/master/demo/3.png)
+![歌单详情](https://github.com/Mohannnnn/react-music/blob/master/demo/4.png)
+![播放页](https://github.com/Mohannnnn/react-music/blob/master/demo/5.png)
 ![gif预览播放](https://github.com/Mohannnnn/react-music/blob/master/demo/6.gif)
 
