@@ -19,7 +19,6 @@ class HotList extends React.Component{
         this.state = {
             songList : []
         }
-        // this.addToSongList = this.addToSongList.bind(this);
     }
     componentDidMount(){
         getSongList().then(res => {
@@ -32,13 +31,7 @@ class HotList extends React.Component{
     }
     addToSongList(ele ,e) {
         e.stopPropagation();
-        // console.log(ele,e.target)
-        this.props.songListAddDispatch([{
-            id : ele.id,
-            type : 'netease',
-            name : ele.name,
-            singer : ele.singer
-        }])
+        this.props.songListAddDispatch([Object.assign(ele,{type : 'netease'})]);
     }
     render(){
         return(
@@ -51,7 +44,7 @@ class HotList extends React.Component{
                 <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
                 {
                     !this.state.songList.songs? <Loading/> : this.state.songList.songs.map((ele , index ) => {
-                        if(index < 20) {
+                        if(index < 50) {
                             return (                         
                                 <Row  key={index} type={'flex'}  align={'middle'} style={{padding:'5px 0 5px 10px'}}>
                                     <Col xs={{span: 2 }} sm={{span: 1}} style={{fontSize:'18px',color:'#999'}}>{index+1}</Col>
@@ -63,8 +56,6 @@ class HotList extends React.Component{
                                                     <Col style={{fontSize:'12px',color:'#888'}}>{ele.singer}</Col>
                                                 </Link>
                                             </Row>
-                                            {/* <Icon type="delete" /> */}
-                                            {/* <Icon type="check" style={{ fontSize: '22px',padding: '10px 5px', color: '#1890ff'}}/> */}
                                             <Icon type="plus" onClick={this.addToSongList.bind(this,ele)} style={{ fontSize: '22px',padding: '10px', color: '#8a8a8a',cursor: 'pointer'}}/>
                                         </Row>
                                     </Col>
