@@ -21,7 +21,7 @@ class Recommend extends React.Component{
     }
     componentDidMount(){
         //获取歌单
-        getAlbumList().then(res => {
+        getAlbumList({limit:15}).then(res => {
             this.props.albumListUpdateDispatch(res.data);
         })
     }
