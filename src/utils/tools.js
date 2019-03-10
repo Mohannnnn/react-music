@@ -2,7 +2,7 @@
  * @Author: wuhan  [https://github.com/Mohannnnn] 
  * @Date: 2018-09-19 21:15:25 
  * @Last Modified by: wuhan
- * @Last Modified time: 2019-03-08 18:44:47
+ * @Last Modified time: 2019-03-10 20:09:34
  */
 //设置localStorage值
 export const setLocalStorage = (value, key) => {
