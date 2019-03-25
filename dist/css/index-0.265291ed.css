@@ -18,6 +18,7 @@
 @charset "utf-8";
 html,body{
     background-color: #f3f3f3;
+    height: auto;
 }
 #root{
     width: 100%;
