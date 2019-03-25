@@ -16,18 +16,18 @@
  * @Last Modified time: 2019-03-25 11:22:54
  */
 @charset "utf-8";
-@media screen and (min-width: 750px) {
-    #root{
-        width: 750px;
-        margin: 0 auto;
-    }
-}
 html,body{
     background-color: #f3f3f3;
 }
 #root{
     width: 100%;
     height: 100%;
+}
+@media screen and (min-width: 750px) {
+    #root{
+        width: 750px;
+        margin: 0 auto;
+    }
 }
 .app {
     width: 100%;
