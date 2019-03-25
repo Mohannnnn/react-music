@@ -45,7 +45,7 @@ body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, d
 body {
     font: .12rem/1.5 'Microsoft YaHei','宋体', Tahoma, Arial, sans-serif;
     color: #555;
-    background-color: #ffffff;
+    background-color: #f3f3f3;
 }
 em, i {
     font-style: normal;
@@ -130,10 +130,4 @@ a:link,a:active,a:visited,a:hover {
 }
 .dn{
     display: none;
-}
-@media screen and (min-width: 750px) {
-    html,body{
-        width: 750px;
-        margin: 0 auto;
-    }
 }
