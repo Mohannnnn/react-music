@@ -256,10 +256,19 @@ class songDetail extends React.Component{
                                     this.props.songList.map((ele , index) => {
                                         return (
                                             <Row key={ele.id} type={'flex'} className='song-list' justify={'space-between'} align={'middle'} style={{borderBottom:'1px solid #dadada',padding: '5px 15px'}}>
-                                                <Col onClick={this.changePlayCur.bind(this,ele)} style={{flex:'auto',marginRight:'20px',width: '75%',cursor: 'pointer'}}>
+                                                <Row onClick={this.changePlayCur.bind(this,ele)} type={'flex'} justify={'start'} align={'middle'}  style={{flex:'auto',marginRight:'20px',width:'75%',cursor: 'pointer'}}>
                                                     <span style={{fontSize:'18px',color:'#666'}}>{ele.name}</span>
                                                     <span style={{fontSize:'14px',color:'#888',}}> - {ele.singer}</span>
-                                                </Col>
+                                                    {
+                                                        this.props.songPlayCur.id !=  ele.id ? '' :
+                                                        <Col className="status-box">
+                                                            <i></i>
+                                                            <i></i>
+                                                            <i></i>
+                                                            <i></i>
+                                                        </Col>
+                                                    }
+                                                </Row>
                                                 <Icon type="close" onClick={this.deleteToSongList.bind(this,ele)} style={{ fontSize: '18px',padding: '10px', color: '#8a8a8a',cursor: 'pointer'}}/>
                                             </Row>
                                         )

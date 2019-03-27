@@ -70,6 +70,46 @@
     .song-list:hover{
         background:#dadada;
     }
+    .status-box{
+        width: 30px;
+        height: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items:flex-end ;
+        justify-content: space-around;
+        overflow: hidden;
+        margin-left: 20px;
+    }
+    .status-box i {
+        width:5px;
+        height: 100%;
+        display: block;
+        background: #1890ff;
+        border-radius: 5px;
+    }
+    .status-box i:nth-child(1){
+        animation: playing 1s linear 0.2s infinite;
+    }
+    .status-box i:nth-child(2){
+        animation: playing 1s linear 0.4s infinite;
+    }
+    .status-box i:nth-child(3){
+        animation: playing 1s linear 0.6s infinite;
+    }
+    .status-box i:nth-child(4){
+        animation: playing 1s linear 0.8s infinite;
+    }
+    // .status-box.paused i{
+    //     animation-play-state: paused;
+    // }
+    // .status-box.running i{
+    //     animation-play-state: running;
+    // }
+}
+@keyframes playing { 
+    0% { transform : translateY(0px); } 
+    50% { transform: translateY(15px); } 
+    100% { transform : translateY(0px); } 
 }
 @keyframes rotate-pic{
     0%{
