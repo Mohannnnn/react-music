@@ -257,7 +257,7 @@ class songDetail extends React.Component{
                                         return (
                                             <Row key={ele.id} type={'flex'} className='song-list' justify={'space-between'} align={'middle'} style={{borderBottom:'1px solid #dadada',padding: '5px 15px'}}>
                                                 <Row onClick={this.changePlayCur.bind(this,ele)} type={'flex'} justify={'start'} align={'middle'}  style={{flex:'auto',marginRight:'20px',width:'75%',cursor: 'pointer'}}>
-                                                    <span style={{fontSize:'18px',color:'#1890ff',paddingRight:'5px'}}>{index < 10 ? '0' + (index+1) : index+1 }}</span>
+                                                    <span style={{fontSize:'18px',color:'#1890ff',paddingRight:'5px'}}>{index < 10 ? '0' + (index+1) : index+1 }</span>
                                                     <span style={{fontSize:'18px',color:'#666'}}>{ele.name}</span>
                                                     <span style={{fontSize:'14px',color:'#888',}}> - {ele.singer}</span>
                                                     {
