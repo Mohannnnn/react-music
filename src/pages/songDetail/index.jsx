@@ -16,7 +16,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { getNetEaseSongMsg , getQqSongMsg ,getKuGouSongMsg } from "../../api/getData.js";
+import { getNetEaseSongMsg , getQqSongMsg ,getKuGouSongMsg , getKuWoSongMsg} from "../../api/getData.js";
 import { formatTime , formatLrc } from '../../utils/tools.js';
 import fetch from '../../utils/fetch.js';
 
@@ -108,6 +108,15 @@ class songDetail extends React.Component{
                     }
                 })
                 break;
+            case 'kuwo':
+                getKuWoSongMsg({id : songId}).then(res => {
+                    //console.log(res)
+                    if(res.code == 200){
+                        this.props.songPlayCurUpdateDispatch(res.data);
+                        this.props.songListAddDispatch([Object.assign(res.data , {type : type})]);
+                    }
+                })
+            break;
             default:
                 break;
         }

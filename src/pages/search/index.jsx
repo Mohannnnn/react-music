@@ -7,7 +7,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setLocalStorage , getLocalStorage , delLocalStorage } from '../../utils/tools.js';
-import { getKugouSearch , getNetEaseSearch , getQqSearch } from '../../api/getData.js';
+import { getKugouSearch , getKuwoSearch , getNetEaseSearch , getQqSearch } from '../../api/getData.js';
 import Loading from '../../components/Loading';
 import QueueAnim from 'rc-queue-anim';
 import './index.scss';
@@ -25,6 +25,7 @@ class Search extends React.Component{
             searchNetEaseList : [],
             searchQqList : [],
             searchKugouList : [],
+            searchKuwoList : []
         }
         this.startSearch = this.startSearch.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -78,6 +79,14 @@ class Search extends React.Component{
                 if(res.code == 200) {
                     this.setState({
                         searchKugouList : res.data
+                    })
+                }
+            })
+            //酷我
+            getKuwoSearch({s : value , limit : 20}).then(res => {
+                if(res.code == 200) {
+                    this.setState({
+                        searchKuwoList : res.data
                     })
                 }
             })
@@ -142,6 +151,17 @@ class Search extends React.Component{
                 })
             )
         }
+        const KuwoComponent = () => {
+            return (
+                this.state.searchKuwoList.map((ele , index ) => {
+                    if(index < 30 ) {
+                        return (
+                            <Common ele={ele} index={index} from='kuwo' key={index}></Common>
+                        )
+                    }
+                })
+            )
+        }
         const SearchStorageCompontent =  () => {
             return (
                 this.state.searchStorageArr.map((ele ,index) => {
@@ -195,6 +215,15 @@ class Search extends React.Component{
                             <Col style={{fontSize:'19px',color:'#1890ff',paddingLeft: '10px'}}>酷狗音乐搜索结果</Col>
                             <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
                             <KugouComponent></KugouComponent>
+                            </QueueAnim>
+                        </section>
+                    }
+                    {
+                        this.state.searchKugouList.length == 0 ? '' :
+                        <section style={{width:'100%'}}>
+                            <Col style={{fontSize:'19px',color:'#1890ff',paddingLeft: '10px'}}>酷我音乐搜索结果</Col>
+                            <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
+                            <KuwoComponent></KuwoComponent>
                             </QueueAnim>
                         </section>
                     }
