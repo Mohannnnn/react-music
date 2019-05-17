@@ -7,15 +7,15 @@
 
 //请求接口地址配置
 const requestUrl = {
-    albumList: 'https://api.itooi.cn/music/netease/hotSongList', //热门歌单列表
-    songList: 'https://api.itooi.cn/music/netease/songList', //歌单歌曲列表
-    netEaseSearch: 'https://api.itooi.cn/music/netease/search', //网易云搜索
-    qqSearch: 'https://api.itooi.cn/music/tencent/search', //QQ音乐搜索
-    kugouSearch: 'https://api.itooi.cn/music/kugou/search', //酷狗搜索
-    kuWoSearch: 'https://api.itooi.cn/music/kuwo/search', //酷我搜索
-    netEaseSongMsg: 'https://api.itooi.cn/music/netease/song', //网易云歌曲信息
-    qqSongMsg: 'https://api.itooi.cn/music/tencent/song', //QQ歌曲信息
-    kuGouSongMsg: 'https://api.itooi.cn/music/kugou/song', //酷狗歌曲信息
-    kuWoSongMsg: 'https://api.itooi.cn/music/kuwo/song', //酷我歌曲信息
+    albumList: 'https://v1.itooi.cn/netease/songList/hot', //热门歌单列表
+    songList: 'https://v1.itooi.cn/netease/songList', //歌单歌曲列表
+    netEaseSearch: 'https://v1.itooi.cn/netease/search', //网易云搜索
+    qqSearch: 'https://v1.itooi.cn/tencent/search', //QQ音乐搜索
+    kugouSearch: 'https://v1.itooi.cn/kugou/search', //酷狗搜索
+    kuWoSearch: 'https://v1.itooi.cn/kuwo/search', //酷我搜索
+    netEaseSongMsg: 'https://v1.itooi.cn/netease/song', //网易云歌曲信息
+    qqSongMsg: 'https://v1.itooi.cn/tencent/song', //QQ歌曲信息
+    kuGouSongMsg: 'https://v1.itooi.cn/kugou/song', //酷狗歌曲信息
+    kuWoSongMsg: 'https://v1.itooi.cn/kuwo/song', //酷我歌曲信息
 }
 export default requestUrl;
