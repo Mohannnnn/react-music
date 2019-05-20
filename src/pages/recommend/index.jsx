@@ -22,7 +22,6 @@ class Recommend extends React.Component{
     componentDidMount(){
         //获取歌单
         getAlbumList({pageSize:15}).then(res => {
-            console.log(res)
             this.props.albumListUpdateDispatch(res.data);
         })
     }
