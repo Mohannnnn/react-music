@@ -36,7 +36,7 @@ class AlbumDetail extends React.Component{
         this.getSongs(albumId);
     }
     getSongs(albumId){
-        getSongList({id : albumId,limit:30}).then(res => {
+        getSongList({id : albumId,pageSize:30 , format : 0 }).then(res => {
             if(res.code == 200){
                 this.setState({
                     id : albumId,
@@ -48,12 +48,34 @@ class AlbumDetail extends React.Component{
     //添加单个
     addToSongList(ele ,e) {
         e.stopPropagation();
-        this.props.songListAddDispatch([Object.assign(ele , {type : 'netease'})]);
+        // this.props.songListAddDispatch([Object.assign(ele , {type : 'netease'})]);
+        this.props.songListAddDispatch([{
+            type : 'netease',
+            singer : ele.artists[0].name,
+            name: ele.name,
+            id: ele.id,
+            time: parseInt(ele.duration/1000),
+            pic: ele.album.blurPicUrl,
+            lrc: `http://v1.itooi.cn/netease/lrc?id=${ele.id}`,
+            url: `http://v1.itooi.cn/netease/url?id=${ele.id}`
+        }]);
     }
     //添加全部
     addAllToSongList(){
-       let newArr = this.state.songMsg.songs.map(ele => {
-            return Object.assign(ele , { type : 'netease' });
+    //    let newArr = this.state.songMsg.map(ele => {
+    //         return Object.assign(ele , { type : 'netease' });
+    //     })
+        let newArr = this.state.songMsg.tracks.map(ele => {
+            return {
+                type : 'netease',
+                singer : ele.artists[0].name,
+                name: ele.name,
+                id: ele.id,
+                time: parseInt(ele.duration/1000),
+                pic: ele.album.blurPicUrl,
+                lrc: `http://v1.itooi.cn/netease/lrc?id=${ele.id}`,
+                url: `http://v1.itooi.cn/netease/url?id=${ele.id}`
+            }
         })
         this.props.songListAddDispatch(newArr);
     }
@@ -61,18 +83,18 @@ class AlbumDetail extends React.Component{
         return(
             <section className="album-detail">
                 <Row className="head"  style={{padding: '30px 10px 10px 15px'}}>
-                    <div className="mask" style={{backgroundImage: `url(${this.state.songMsg.songListPic})`}}></div>
+                    <div className="mask" style={{backgroundImage: `url(${this.state.songMsg.coverImgUrl})`}}></div>
                     <Col xs={{span: 10 }} sm={{span: 6}} style={{postion:'relative',zIndex:2,}}>
-                        <img src={this.state.songMsg.songListPic} alt="" style={{width:'126px',height:'126px'}}/>
-                        <span className="listen">{this.state.songMsg.songListPlayCount}</span>
+                        <img src={this.state.songMsg.coverImgUrl} alt="" style={{width:'126px',height:'126px'}}/>
+                        <span className="listen">{this.state.songMsg.playCount}</span>
                     </Col>
                     <Col span={14} style={{postion:'relative',zIndex:2}}>
-                        <Texty style={{color: '#fefefe',fontSize: '17px',lineHeight:'20px'}}>{this.state.songMsg.songListName}</Texty>
-                        <Texty style={{color: '#ccc',fontSize: '14px'}}>{this.state.songMsg.songListUserId? `ID:${this.state.songMsg.songListUserId}` : ''}</Texty>
+                        <Texty style={{color: '#fefefe',fontSize: '17px',lineHeight:'20px'}}>{this.state.songMsg.name}</Texty>
+                        <Texty style={{color: '#ccc',fontSize: '14px'}}>{this.state.songMsg.userId? `ID:${this.state.songMsg.userId}` : ''}</Texty>
                     </Col>
                 </Row>
                 <Row style={{padding: '20px 10px 10px 15px',color: '#666',fontSize: '14px'}}>
-                    <Texty>{this.state.songMsg.songListDescription ? `简介：${this.state.songMsg.songListDescription.length > 200 ? this.state.songMsg.songListDescription.slice(0,200) + '...' : this.state.songMsg.songListDescription }` : ''}</Texty>
+                    <Texty>{this.state.songMsg.description ? `简介：${this.state.songMsg.description.length > 200 ? this.state.songMsg.description.slice(0,200) + '...' : this.state.songMsg.description }` : ''}</Texty>
                 </Row>
                 <Row type={'flex'}  justify={'space-between'} style={{padding: '0px 10px 0px 10px',color: '#666',fontSize: '18px',lineHeight:'40px',background:'#eeeff0'}}>
                     <Col>歌单列表：</Col>
@@ -81,7 +103,7 @@ class AlbumDetail extends React.Component{
                 <Row style={{zIndex:10,position:'relative'}}>
                 <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
                     {
-                    !this.state.songMsg.songs? <Loading/> : this.state.songMsg.songs.map((ele , index ) => {
+                    !this.state.songMsg.tracks ? <Loading/> : this.state.songMsg.tracks.map((ele , index ) => {
                         if(index < 30) {
                             return (                                                          
                                 <Row key={index} type={'flex'}  align={'middle'} style={{padding:'5px 0 5px 10px'}}>
@@ -91,7 +113,7 @@ class AlbumDetail extends React.Component{
                                             <Row style={{width:'80%'}}>
                                                 <Link to={{pathname : '/songdetail' , query : {id : ele.id , from : 'netease' } , search : `?id=${ele.id}&from=netease`}} key={index}>                                    
                                                     <Col style={{fontSize:'16px',color:'#333'}}>{ele.name}</Col>
-                                                    <Col style={{fontSize:'12px',color:'#888'}}>{ele.singer}</Col>
+                                                    <Col style={{fontSize:'12px',color:'#888'}}>{ele.artists[0].name}</Col>
                                                 </Link>
                                             </Row>
                                             <Icon type="plus" onClick={this.addToSongList.bind(this,ele)} style={{ fontSize: '22px',padding: '10px', color: '#8a8a8a',cursor: 'pointer'}}/>
