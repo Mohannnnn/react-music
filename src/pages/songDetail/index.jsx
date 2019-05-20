@@ -50,7 +50,7 @@ class songDetail extends React.Component{
     }
     componentDidUpdate(prevProps){
         if(this.props.songPlayCur != prevProps.songPlayCur){
-            fetch({url : this.props.songPlayCur.lrc , dataType :'text'}).then(res => {
+            fetch({url : this.props.songPlayCur.lrc.replace('http','https') , dataType :'text'}).then(res => {
                 if(res) {
                     this.setState({
                         lrcArr : formatLrc(res)
@@ -85,8 +85,8 @@ class songDetail extends React.Component{
                 getNetEaseSongMsg({id : songId}).then(res => {
                     //console.log(res)
                     if(res.code == 200){
-                        this.props.songPlayCurUpdateDispatch(res.data);
-                        this.props.songListAddDispatch([Object.assign(res.data , {type : type})]);
+                        this.props.songPlayCurUpdateDispatch(res.data[0]);
+                        this.props.songListAddDispatch([Object.assign(res.data[0] , {type : type})]);
                     }
                 })
                 break;
@@ -94,8 +94,8 @@ class songDetail extends React.Component{
                 getQqSongMsg({id : songId}).then(res => {
                     //console.log(res)
                     if(res.code == 200){
-                        this.props.songPlayCurUpdateDispatch(res.data);
-                        this.props.songListAddDispatch([Object.assign(res.data , {type : type})]);
+                        this.props.songPlayCurUpdateDispatch(res.data[0]);
+                        this.props.songListAddDispatch([Object.assign(res.data[0] , {type : type})]);
                     }
                 })
                 break;
@@ -103,8 +103,8 @@ class songDetail extends React.Component{
                 getKuGouSongMsg({id : songId}).then(res => {
                     //console.log(res)
                     if(res.code == 200){
-                        this.props.songPlayCurUpdateDispatch(res.data);
-                        this.props.songListAddDispatch([Object.assign(res.data , {type : type})]);
+                        this.props.songPlayCurUpdateDispatch(res.data[0]);
+                        this.props.songListAddDispatch([Object.assign(res.data[0] , {type : type})]);
                     }
                 })
                 break;
@@ -112,8 +112,8 @@ class songDetail extends React.Component{
                 getKuWoSongMsg({id : songId}).then(res => {
                     //console.log(res)
                     if(res.code == 200){
-                        this.props.songPlayCurUpdateDispatch(res.data);
-                        this.props.songListAddDispatch([Object.assign(res.data , {type : type})]);
+                        this.props.songPlayCurUpdateDispatch(res.data[0]);
+                        this.props.songListAddDispatch([Object.assign(res.data[0] , {type : type})]);
                     }
                 })
             break;
@@ -219,7 +219,7 @@ class songDetail extends React.Component{
                                     </Row>
                                 </TweenOne>
                                 <TweenOne className="banner-content" animation={{ x: -100, opacity: 0, type: 'from',delay: 300}}>
-                                    <Col className={`${this.props.songPlayStatus? 'playing' : 'paused'} song-pic`} style={{backgroundImage:`url(${this.props.songPlayCur.pic})`,borderRadius: '50%',margin:'0 auto',width:'256px',height:'256px'}}></Col>
+                                    <Col className={`${this.props.songPlayStatus? 'playing' : 'paused'} song-pic`} style={{backgroundImage:`url(${this.props.songPlayCur.pic})`,borderRadius: '50%',margin:'0 auto',width:'256px',height:'256px',backgroundSize: 'cover'}}></Col>
                                 </TweenOne>
                             </Col>
                             :
