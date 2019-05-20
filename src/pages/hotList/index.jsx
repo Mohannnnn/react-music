@@ -21,7 +21,8 @@ class HotList extends React.Component{
         }
     }
     componentDidMount(){
-        getSongList().then(res => {
+        //热门歌单歌曲列表
+        getSongList({id : 3778678}).then(res => {
             if(res.code == 200) {
                 this.setState({
                     songList : res.data
@@ -43,7 +44,7 @@ class HotList extends React.Component{
                 </Row>
                 <QueueAnim type={['right', 'left']} ease={['easeOutQuart', 'easeInOutQuart']}>
                 {
-                    !this.state.songList.songs? <Loading/> : this.state.songList.songs.map((ele , index ) => {
+                    !this.state.songList? <Loading/> : this.state.songList.map((ele , index ) => {
                         if(index < 50) {
                             return (                         
                                 <Row  key={index} type={'flex'}  align={'middle'} style={{padding:'5px 0 5px 10px'}}>
