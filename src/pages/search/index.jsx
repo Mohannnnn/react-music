@@ -59,7 +59,7 @@ class Search extends React.Component{
                 initSearchMusic : true
             })
             //网易云
-            getNetEaseSearch({s : value , limit : 20}).then(res => {
+            getNetEaseSearch({keyword : value , pageSize : 20}).then(res => {
                 if(res.code == 200) {
                     this.setState({
                         searchNetEaseList : res.data
@@ -67,7 +67,7 @@ class Search extends React.Component{
                 }
             })
             //QQ
-            getQqSearch({s : value , limit : 20}).then(res => {
+            getQqSearch({keyword : value , pageSize : 20}).then(res => {
                 if(res.code == 200) {
                     this.setState({
                         searchQqList : res.data
@@ -75,7 +75,7 @@ class Search extends React.Component{
                 }
             })
             //酷狗
-            getKugouSearch({s : value , limit : 20}).then(res => {
+            getKugouSearch({keyword : value , pageSize : 20}).then(res => {
                 if(res.code == 200) {
                     this.setState({
                         searchKugouList : res.data
@@ -83,7 +83,7 @@ class Search extends React.Component{
                 }
             })
             //酷我
-            getKuwoSearch({s : value , limit : 20}).then(res => {
+            getKuwoSearch({keyword : value , pageSize : 20}).then(res => {
                 if(res.code == 200) {
                     this.setState({
                         searchKuwoList : res.data
@@ -93,7 +93,7 @@ class Search extends React.Component{
         }
     }
     handleChange(e) {
-        console.log(e.target)
+        // console.log(e.target)
     }
     addToSongList(ele ,from,e) {
         e.stopPropagation();
