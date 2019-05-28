@@ -95,4 +95,3 @@ yarn build/npm run build
 ![歌单详情](https://github.com/Mohannnnn/react-music/blob/master/demo/4.png)
 ![播放页](https://github.com/Mohannnnn/react-music/blob/master/demo/5.png)
 ![gif预览播放](https://github.com/Mohannnnn/react-music/blob/master/demo/6.gif)
-
