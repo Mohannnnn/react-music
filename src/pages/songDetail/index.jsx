@@ -50,7 +50,7 @@ class songDetail extends React.Component{
     }
     componentDidUpdate(prevProps){
         if(this.props.songPlayCur != prevProps.songPlayCur){
-            fetch({url : this.props.songPlayCur.lrc.replace('http','https') , dataType :'text'}).then(res => {
+            fetch({url : this.props.songPlayCur.lrc , dataType :'text'}).then(res => {
                 if(res) {
                     this.setState({
                         lrcArr : formatLrc(res)
