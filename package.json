@@ -26,7 +26,7 @@
     "@commitlint/config-conventional": "^7.0.1",
     "antd": "^3.11.6",
     "autoprefixer": "^9.0.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
     "babel-loader": "^7.1.5",
